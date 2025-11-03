@@ -21,27 +21,33 @@
       </h1>
 
       <!-- Social Proof Stats - 社會證明數字列 -->
-      <div class="stats-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10 max-w-4xl mx-auto opacity-0 translate-y-10 delay-100"
+      <div class="stats-container grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 max-w-5xl mx-auto opacity-0 translate-y-10 delay-100"
            :class="{ 'animate-fade-in-up': isVisible }">
-        <div class="stat-card bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-          <div class="text-4xl md:text-5xl font-bold text-tesla-red mb-2">
+        <!-- 服務車主 -->
+        <div class="stat-card backdrop-blur-md rounded-xl p-8 hover:bg-white/5 transition-all duration-300">
+          <div class="text-5xl md:text-6xl font-bold text-white mb-3">
             {{ animatedStats.customers }}+
           </div>
-          <div class="text-sm md:text-base text-gray-300">服務車主</div>
+          <div class="text-base md:text-lg text-gray-300 font-light">服務車主</div>
         </div>
 
-        <div class="stat-card bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-          <div class="text-4xl md:text-5xl font-bold text-tesla-red mb-2">
-            NT$ {{ animatedStats.savings.toLocaleString() }}
+        <!-- 平均省下保費 -->
+        <div class="stat-card backdrop-blur-md rounded-xl p-8 hover:bg-white/5 transition-all duration-300">
+          <div class="flex items-baseline justify-center gap-2 mb-3">
+            <span class="text-lg md:text-xl text-white font-light">NT$</span>
+            <span class="text-5xl md:text-6xl font-bold text-white">
+              {{ animatedStats.savings.toLocaleString() }}
+            </span>
           </div>
-          <div class="text-sm md:text-base text-gray-300">平均省下保費</div>
+          <div class="text-base md:text-lg text-gray-300 font-light">平均省下保費</div>
         </div>
 
-        <div class="stat-card bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-          <div class="text-4xl md:text-5xl font-bold text-tesla-red mb-2">
+        <!-- 客戶滿意度 -->
+        <div class="stat-card backdrop-blur-md rounded-xl p-8 hover:bg-white/5 transition-all duration-300">
+          <div class="text-5xl md:text-6xl font-bold text-white mb-3">
             {{ animatedStats.satisfaction }}%
           </div>
-          <div class="text-sm md:text-base text-gray-300">客戶滿意度</div>
+          <div class="text-base md:text-lg text-gray-300 font-light">客戶滿意度</div>
         </div>
       </div>
 
@@ -84,19 +90,68 @@
         </div>
 
         <!-- Trust Badges - 信任標章 -->
-        <div class="trust-badges flex flex-col md:flex-row items-center justify-center gap-6 text-gray-400">
+        <div class="trust-badges flex flex-col items-center justify-center gap-4 text-gray-400 mb-8">
           <div class="flex items-center gap-2">
             <svg class="w-6 h-6 text-tesla-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
             <span class="text-sm">專業保險經紀人證照</span>
           </div>
+        </div>
 
-          <div class="flex items-center gap-2">
-            <svg class="w-6 h-6 text-tesla-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-            </svg>
-            <span class="text-sm">合作 10+ 家保險公司</span>
+        <!-- 合作產險公司 LOGO -->
+        <div class="insurance-partners">
+          <p class="text-sm text-gray-400 mb-4 text-center">合作台灣知名產險公司</p>
+          <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-4xl mx-auto">
+            <!-- 富邦產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-blue-700 font-bold text-sm md:text-base whitespace-nowrap">富邦產險</span>
+            </div>
+
+            <!-- 國泰產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-green-700 font-bold text-sm md:text-base whitespace-nowrap">國泰產險</span>
+            </div>
+
+            <!-- 新光產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-red-600 font-bold text-sm md:text-base whitespace-nowrap">新光產險</span>
+            </div>
+
+            <!-- 南山產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-orange-600 font-bold text-sm md:text-base whitespace-nowrap">南山產險</span>
+            </div>
+
+            <!-- 明台產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-indigo-700 font-bold text-sm md:text-base whitespace-nowrap">明台產險</span>
+            </div>
+
+            <!-- 泰安產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-teal-700 font-bold text-sm md:text-base whitespace-nowrap">泰安產險</span>
+            </div>
+
+            <!-- 華南產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-blue-600 font-bold text-sm md:text-base whitespace-nowrap">華南產險</span>
+            </div>
+
+            <!-- 旺旺友聯 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-red-700 font-bold text-sm md:text-base whitespace-nowrap">旺旺友聯</span>
+            </div>
+
+            <!-- 和泰產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-gray-800 font-bold text-sm md:text-base whitespace-nowrap">和泰產險</span>
+            </div>
+
+            <!-- 第一產險 -->
+            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
+              <span class="text-purple-700 font-bold text-sm md:text-base whitespace-nowrap">第一產險</span>
+            </div>
           </div>
         </div>
       </div>
@@ -232,7 +287,17 @@ const scrollToCalculator = () => {
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(232, 33, 39, 0.2);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Partner logos hover effect */
+.partner-logo {
+  transition: all 0.3s ease;
+}
+
+.partner-logo:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 </style>
