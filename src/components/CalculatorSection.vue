@@ -8,6 +8,56 @@
       </div>
 
       <div class="calculator-container bg-tesla-gray/20 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-gray-700/50">
+
+        <!-- 稀缺性提示區塊 -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-gray-600/50">
+          <!-- 限定優惠 -->
+          <div class="flex items-center gap-2 bg-tesla-red/10 px-4 py-3 rounded-lg border border-tesla-red/30">
+            <span class="text-2xl">⏰</span>
+            <p class="text-sm md:text-base text-gray-200">
+              本月限定: 填寫表單即送<span class="text-tesla-red font-semibold">『特斯拉車險完整指南』</span>電子書
+            </p>
+          </div>
+
+          <!-- 今日人數 -->
+          <div class="flex items-center gap-2 text-sm md:text-base text-gray-400">
+            <span class="text-xl">👥</span>
+            <span>今日已有 <span class="text-tesla-red font-bold text-lg">{{ todayConsultations }}</span> 位車主填寫諮詢</span>
+          </div>
+        </div>
+
+        <!-- 進度指示器 -->
+        <div class="progress-section mb-10">
+          <div class="flex justify-between items-center mb-4">
+            <div v-for="(step, index) in steps" :key="index"
+                 class="flex items-center"
+                 :class="{ 'flex-1': index < steps.length - 1 }">
+              <div class="flex items-center gap-2">
+                <div class="step-circle w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-sm md:text-base transition-all duration-300"
+                     :class="currentStep >= index + 1 ? 'bg-tesla-red text-white' : 'bg-gray-700 text-gray-400'">
+                  {{ index + 1 }}
+                </div>
+                <span class="text-xs md:text-sm font-medium hidden sm:inline"
+                      :class="currentStep >= index + 1 ? 'text-white' : 'text-gray-500'">
+                  {{ step }}
+                </span>
+              </div>
+              <!-- 連接線 -->
+              <div v-if="index < steps.length - 1"
+                   class="flex-1 h-1 mx-2 md:mx-4 rounded transition-all duration-300"
+                   :class="currentStep > index + 1 ? 'bg-tesla-red' : 'bg-gray-700'">
+              </div>
+            </div>
+          </div>
+
+          <!-- 進度條 -->
+          <div class="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+            <div class="bg-gradient-to-r from-tesla-red to-red-600 h-full transition-all duration-500 ease-out"
+                 :style="{ width: progressPercentage + '%' }">
+            </div>
+          </div>
+          <p class="text-right text-sm text-gray-400 mt-2">{{ progressPercentage }}% 完成</p>
+        </div>
         <!-- Step 1: Car Model Selection -->
         <div class="mb-12">
           <label class="block text-2xl font-semibold mb-6">選擇車型</label>
@@ -117,6 +167,42 @@
               <span>NT$ 100,000</span>
             </div>
           </div>
+
+          <!-- 即時反饋文字 -->
+          <div class="mt-4 p-4 rounded-lg transition-all duration-300"
+               :class="budgetFeedback.bgClass">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">{{ budgetFeedback.icon }}</span>
+              <p class="text-sm md:text-base" :class="budgetFeedback.textClass">
+                {{ budgetFeedback.message }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 降低承諾門檻提示 -->
+        <div v-if="showResults" class="commitment-section mb-8 p-6 bg-gradient-to-r from-green-900/20 to-green-800/10 rounded-xl border border-green-700/30">
+          <h4 class="text-lg font-semibold text-green-400 mb-4 text-center">安心保證</h4>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm md:text-base text-gray-300">免費諮詢，無購買壓力</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm md:text-base text-gray-300">隱私保護，絕不騷擾</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm md:text-base text-gray-300">24小時內專人回覆</span>
+            </div>
+          </div>
         </div>
 
         <!-- Results -->
@@ -154,7 +240,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+
+// 步驟定義
+const steps = ['選擇車型', '設定預算', '取得報價']
+
+// 今日諮詢人數（動態生成 18-28 之間的隨機數）
+const todayConsultations = ref(23)
+
+// 在組件掛載時生成隨機人數
+onMounted(() => {
+  todayConsultations.value = Math.floor(Math.random() * 11) + 18 // 18-28
+})
 
 // Car models with images
 // 圖片來源：PNG 去背車輛圖片，展現賽車遊戲風格
@@ -210,6 +307,55 @@ const handleModelChange = () => {
 
 const showResults = computed(() => {
   return selectedModel.value && selectedYear.value && purchaseMonth.value && purchaseYear.value
+})
+
+// 計算當前步驟
+const currentStep = computed(() => {
+  if (!selectedModel.value) return 1
+  if (!selectedYear.value || !purchaseMonth.value || !purchaseYear.value) return 2
+  return 3
+})
+
+// 計算進度百分比
+const progressPercentage = computed(() => {
+  let progress = 0
+
+  // 步驟 1: 選擇車型
+  if (selectedModel.value) progress += 33
+
+  // 步驟 2: 設定年份和購入時間
+  if (selectedYear.value && purchaseMonth.value && purchaseYear.value) progress += 34
+
+  // 步驟 3: 完成所有填寫
+  if (showResults.value) progress += 33
+
+  return Math.min(progress, 100)
+})
+
+// 預算反饋
+const budgetFeedback = computed(() => {
+  if (budget.value < 30000) {
+    return {
+      icon: '⚠️',
+      message: '建議提高預算以獲得更全面保障',
+      bgClass: 'bg-yellow-900/20 border border-yellow-700/30',
+      textClass: 'text-yellow-300'
+    }
+  } else if (budget.value >= 30000 && budget.value <= 60000) {
+    return {
+      icon: '✅',
+      message: '此預算可獲得完整保障方案',
+      bgClass: 'bg-green-900/20 border border-green-700/30',
+      textClass: 'text-green-300'
+    }
+  } else {
+    return {
+      icon: '⭐',
+      message: '您可享有頂級全方位保障',
+      bgClass: 'bg-blue-900/20 border border-blue-700/30',
+      textClass: 'text-blue-300'
+    }
+  }
 })
 
 const coverageItems = computed(() => {
