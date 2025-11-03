@@ -26,50 +26,50 @@
           </div>
         </div>
 
-        <!-- 進度指示器 -->
-        <div class="progress-section mb-10">
-          <div class="flex justify-between items-center mb-4">
+        <!-- 進度指示器 - Sticky 定位，隨時可見 -->
+        <div class="progress-section sticky top-0 z-40 bg-tesla-gray/95 backdrop-blur-md -mx-8 md:-mx-12 px-8 md:px-12 py-4 mb-6 border-b border-gray-600/50">
+          <div class="flex justify-between items-center mb-3">
             <div v-for="(step, index) in steps" :key="index"
                  class="flex items-center"
                  :class="{ 'flex-1': index < steps.length - 1 }">
               <div class="flex items-center gap-2">
-                <div class="step-circle w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-sm md:text-base transition-all duration-300"
+                <div class="step-circle w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-semibold text-xs md:text-sm transition-all duration-300"
                      :class="currentStep >= index + 1 ? 'bg-tesla-red text-white' : 'bg-gray-700 text-gray-400'">
                   {{ index + 1 }}
                 </div>
-                <span class="text-xs md:text-sm font-medium hidden sm:inline"
+                <span class="text-xs font-medium hidden sm:inline"
                       :class="currentStep >= index + 1 ? 'text-white' : 'text-gray-500'">
                   {{ step }}
                 </span>
               </div>
               <!-- 連接線 -->
               <div v-if="index < steps.length - 1"
-                   class="flex-1 h-1 mx-2 md:mx-4 rounded transition-all duration-300"
+                   class="flex-1 h-1 mx-2 md:mx-3 rounded transition-all duration-300"
                    :class="currentStep > index + 1 ? 'bg-tesla-red' : 'bg-gray-700'">
               </div>
             </div>
           </div>
 
           <!-- 進度條 -->
-          <div class="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+          <div class="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
             <div class="bg-gradient-to-r from-tesla-red to-red-600 h-full transition-all duration-500 ease-out"
                  :style="{ width: progressPercentage + '%' }">
             </div>
           </div>
-          <p class="text-right text-sm text-gray-400 mt-2">{{ progressPercentage }}% 完成</p>
+          <p class="text-right text-xs text-gray-400 mt-1.5">{{ progressPercentage }}% 完成</p>
         </div>
         <!-- Step 1: Car Model Selection -->
-        <div class="mb-12">
-          <label class="block text-2xl font-semibold mb-6">選擇車型</label>
+        <div class="mb-8">
+          <label class="block text-lg md:text-xl font-semibold mb-4">選擇車型</label>
 
           <!-- 下拉選單 -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <!-- 左側：下拉選單 -->
             <div>
               <select
                 v-model="selectedModelName"
                 @change="handleModelChange"
-                class="w-full px-6 py-5 bg-tesla-gray border-2 border-gray-600 rounded-lg text-white text-lg
+                class="w-full px-4 py-3 bg-tesla-gray border-2 border-gray-600 rounded-lg text-white text-base
                        focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all
                        cursor-pointer hover:border-gray-500">
                 <option value="">請選擇您的特斯拉車款</option>
@@ -79,10 +79,10 @@
               </select>
 
               <!-- 車款資訊 -->
-              <div v-if="selectedModel" class="mt-6 p-6 bg-tesla-gray/50 rounded-lg border border-gray-600">
-                <h3 class="text-2xl font-bold text-white mb-2">{{ selectedModel.name }}</h3>
-                <p class="text-gray-300 mb-4">{{ selectedModel.type }}</p>
-                <div class="space-y-2 text-sm text-gray-400">
+              <div v-if="selectedModel" class="mt-4 p-4 bg-tesla-gray/50 rounded-lg border border-gray-600">
+                <h3 class="text-lg font-bold text-white mb-1">{{ selectedModel.name }}</h3>
+                <p class="text-gray-300 mb-3 text-sm">{{ selectedModel.type }}</p>
+                <div class="space-y-1 text-xs text-gray-400">
                   <p>✓ 專業電動車保障</p>
                   <p>✓ 電池保固涵蓋</p>
                   <p>✓ 充電設備保險</p>
@@ -91,7 +91,7 @@
             </div>
 
             <!-- 右側：車輛展示區 -->
-            <div class="relative h-64 md:h-80 flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700">
+            <div class="relative h-48 md:h-64 flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700">
               <!-- 預設提示 -->
               <div v-if="!selectedModel" class="text-center text-gray-500">
                 <svg class="w-20 h-20 mx-auto mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,11 +115,11 @@
         </div>
 
         <!-- Step 2: Year Selection -->
-        <div class="mb-12">
-          <label class="block text-xl font-semibold mb-4">車款年份</label>
+        <div class="mb-6">
+          <label class="block text-base md:text-lg font-semibold mb-3">車款年份</label>
           <select
             v-model="selectedYear"
-            class="w-full md:w-64 px-6 py-4 bg-tesla-gray border border-gray-600 rounded-lg text-white
+            class="w-full md:w-64 px-4 py-3 bg-tesla-gray border border-gray-600 rounded-lg text-white text-sm
                    focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all">
             <option value="">請選擇年份</option>
             <option v-for="year in years" :key="year" :value="year">{{ year }} 年</option>
@@ -127,19 +127,19 @@
         </div>
 
         <!-- Step 3: Purchase Date -->
-        <div class="mb-12">
-          <label class="block text-xl font-semibold mb-4">購入時間</label>
-          <div class="flex gap-4">
+        <div class="mb-6">
+          <label class="block text-base md:text-lg font-semibold mb-3">購入時間</label>
+          <div class="flex gap-3">
             <select
               v-model="purchaseMonth"
-              class="flex-1 md:flex-none md:w-48 px-6 py-4 bg-tesla-gray border border-gray-600 rounded-lg text-white
+              class="flex-1 md:flex-none md:w-40 px-4 py-3 bg-tesla-gray border border-gray-600 rounded-lg text-white text-sm
                      focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all">
               <option value="">月份</option>
               <option v-for="month in 12" :key="month" :value="month">{{ month }} 月</option>
             </select>
             <select
               v-model="purchaseYear"
-              class="flex-1 md:flex-none md:w-48 px-6 py-4 bg-tesla-gray border border-gray-600 rounded-lg text-white
+              class="flex-1 md:flex-none md:w-40 px-4 py-3 bg-tesla-gray border border-gray-600 rounded-lg text-white text-sm
                      focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all">
               <option value="">年份</option>
               <option v-for="year in purchaseYears" :key="year" :value="year">{{ year }} 年</option>
@@ -148,10 +148,10 @@
         </div>
 
         <!-- Step 4: Budget Slider -->
-        <div class="mb-12">
-          <label class="block text-xl font-semibold mb-4">
+        <div class="mb-8">
+          <label class="block text-base md:text-lg font-semibold mb-3">
             保費預算
-            <span class="text-tesla-red ml-4 text-3xl font-bold">NT$ {{ budget.toLocaleString() }}</span>
+            <span class="text-tesla-red ml-3 text-2xl md:text-3xl font-bold">NT$ {{ budget.toLocaleString() }}</span>
           </label>
           <div class="relative pt-2">
             <input
@@ -169,11 +169,11 @@
           </div>
 
           <!-- 即時反饋文字 -->
-          <div class="mt-4 p-4 rounded-lg transition-all duration-300"
+          <div class="mt-3 p-3 rounded-lg transition-all duration-300"
                :class="budgetFeedback.bgClass">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">{{ budgetFeedback.icon }}</span>
-              <p class="text-sm md:text-base" :class="budgetFeedback.textClass">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">{{ budgetFeedback.icon }}</span>
+              <p class="text-xs md:text-sm" :class="budgetFeedback.textClass">
                 {{ budgetFeedback.message }}
               </p>
             </div>
@@ -181,55 +181,55 @@
         </div>
 
         <!-- 降低承諾門檻提示 -->
-        <div v-if="showResults" class="commitment-section mb-8 p-6 bg-gradient-to-r from-green-900/20 to-green-800/10 rounded-xl border border-green-700/30">
-          <h4 class="text-lg font-semibold text-green-400 mb-4 text-center">安心保證</h4>
-          <div class="grid md:grid-cols-3 gap-4">
-            <div class="flex items-center gap-3">
-              <svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <div v-if="showResults" class="commitment-section mb-6 p-4 md:p-5 bg-gradient-to-r from-green-900/20 to-green-800/10 rounded-xl border border-green-700/30">
+          <h4 class="text-base md:text-lg font-semibold text-green-400 mb-3 text-center">安心保證</h4>
+          <div class="grid md:grid-cols-3 gap-3">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-sm md:text-base text-gray-300">免費諮詢，無購買壓力</span>
+              <span class="text-xs md:text-sm text-gray-300">免費諮詢，無購買壓力</span>
             </div>
-            <div class="flex items-center gap-3">
-              <svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-sm md:text-base text-gray-300">隱私保護，絕不騷擾</span>
+              <span class="text-xs md:text-sm text-gray-300">隱私保護，絕不騷擾</span>
             </div>
-            <div class="flex items-center gap-3">
-              <svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-sm md:text-base text-gray-300">24小時內專人回覆</span>
+              <span class="text-xs md:text-sm text-gray-300">24小時內專人回覆</span>
             </div>
           </div>
         </div>
 
         <!-- Results -->
-        <div v-if="showResults" class="results-panel bg-gradient-to-br from-tesla-red/10 to-tesla-red/5 rounded-xl p-8 border border-tesla-red/30">
-          <h3 class="text-2xl font-bold mb-6 text-tesla-red">推薦保險方案</h3>
+        <div v-if="showResults" class="results-panel bg-gradient-to-br from-tesla-red/10 to-tesla-red/5 rounded-xl p-5 md:p-6 border border-tesla-red/30">
+          <h3 class="text-xl md:text-2xl font-bold mb-4 text-tesla-red">推薦保險方案</h3>
 
-          <div class="grid md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-tesla-gray/30 p-6 rounded-lg">
-              <h4 class="font-semibold text-lg mb-2">車輛資訊</h4>
-              <p class="text-gray-300">{{ selectedModel.name }} {{ selectedYear }}</p>
-              <p class="text-sm text-gray-400">購入時間：{{ purchaseYear }}/{{ purchaseMonth }}</p>
+          <div class="grid md:grid-cols-2 gap-4 mb-5">
+            <div class="bg-tesla-gray/30 p-4 rounded-lg">
+              <h4 class="font-semibold text-base mb-2">車輛資訊</h4>
+              <p class="text-gray-300 text-sm">{{ selectedModel.name }} {{ selectedYear }}</p>
+              <p class="text-xs text-gray-400">購入時間：{{ purchaseYear }}/{{ purchaseMonth }}</p>
             </div>
-            <div class="bg-tesla-gray/30 p-6 rounded-lg">
-              <h4 class="font-semibold text-lg mb-2">預估保費</h4>
-              <p class="text-3xl font-bold text-tesla-red">NT$ {{ budget.toLocaleString() }}</p>
-              <p class="text-sm text-gray-400">年繳保費</p>
+            <div class="bg-tesla-gray/30 p-4 rounded-lg">
+              <h4 class="font-semibold text-base mb-2">預估保費</h4>
+              <p class="text-2xl md:text-3xl font-bold text-tesla-red">NT$ {{ budget.toLocaleString() }}</p>
+              <p class="text-xs text-gray-400">年繳保費</p>
             </div>
           </div>
 
           <div class="coverage-list">
-            <h4 class="font-semibold text-lg mb-4">保障內容</h4>
-            <div class="grid md:grid-cols-2 gap-3">
+            <h4 class="font-semibold text-base md:text-lg mb-3">保障內容</h4>
+            <div class="grid md:grid-cols-2 gap-2">
               <div v-for="item in coverageItems" :key="item" class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-tesla-red" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 text-tesla-red flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-gray-300">{{ item }}</span>
+                <span class="text-gray-300 text-sm">{{ item }}</span>
               </div>
             </div>
           </div>
