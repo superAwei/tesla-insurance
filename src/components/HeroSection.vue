@@ -1,5 +1,5 @@
 <template>
-  <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+  <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden pb-24">
     <!-- Background with overlay -->
     <div class="absolute inset-0 z-0">
       <!-- Tesla background image -->
@@ -12,109 +12,112 @@
       <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-tesla-dark z-10"></div>
     </div>
 
-    <!-- Content -->
-    <div class="relative z-20 text-center px-6 md:px-12 max-w-6xl mx-auto">
+    <!-- Content Container - 加上底部間距避免遮擋 -->
+    <div class="relative z-20 text-center px-6 md:px-12 max-w-6xl mx-auto py-12 md:py-20 mb-20 md:mb-24">
+
       <!-- Main Title -->
-      <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-8 opacity-0 translate-y-10 leading-tight"
+      <h1 class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 opacity-0 translate-y-10 leading-tight"
           :class="{ 'animate-fade-in-up': isVisible }">
         專為特斯拉車主設計的保險方案
       </h1>
 
       <!-- Social Proof Stats - 社會證明數字列 -->
-      <div class="stats-container grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 max-w-5xl mx-auto opacity-0 translate-y-10 delay-100"
+      <div class="stats-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10 max-w-5xl mx-auto opacity-0 translate-y-10 delay-100"
            :class="{ 'animate-fade-in-up': isVisible }">
+
         <!-- 服務車主 -->
-        <div class="stat-card backdrop-blur-md rounded-xl p-8 hover:bg-white/5 transition-all duration-300">
-          <div class="text-5xl md:text-6xl font-bold text-white mb-3">
+        <div class="stat-card backdrop-blur-md rounded-xl p-6 md:p-8 hover:bg-white/5 transition-all duration-300">
+          <div class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-3">
             {{ animatedStats.customers }}+
           </div>
-          <div class="text-base md:text-lg text-gray-300 font-light">服務車主</div>
+          <div class="text-sm md:text-base lg:text-lg text-gray-300 font-light">服務車主</div>
         </div>
 
         <!-- 平均省下保費 -->
-        <div class="stat-card backdrop-blur-md rounded-xl p-8 hover:bg-white/5 transition-all duration-300">
-          <div class="flex items-baseline justify-center gap-2 mb-3">
-            <span class="text-lg md:text-xl text-white font-light">NT$</span>
-            <span class="text-5xl md:text-6xl font-bold text-white">
+        <div class="stat-card backdrop-blur-md rounded-xl p-6 md:p-8 hover:bg-white/5 transition-all duration-300">
+          <div class="flex items-baseline justify-center gap-2 mb-2 md:mb-3">
+            <span class="text-base md:text-lg lg:text-xl text-white font-light">NT$</span>
+            <span class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
               {{ animatedStats.savings.toLocaleString() }}
             </span>
           </div>
-          <div class="text-base md:text-lg text-gray-300 font-light">平均省下保費</div>
+          <div class="text-sm md:text-base lg:text-lg text-gray-300 font-light">平均省下保費</div>
         </div>
 
         <!-- 客戶滿意度 -->
-        <div class="stat-card backdrop-blur-md rounded-xl p-8 hover:bg-white/5 transition-all duration-300">
-          <div class="text-5xl md:text-6xl font-bold text-white mb-3">
+        <div class="stat-card backdrop-blur-md rounded-xl p-6 md:p-8 hover:bg-white/5 transition-all duration-300">
+          <div class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-3">
             {{ animatedStats.satisfaction }}%
           </div>
-          <div class="text-base md:text-lg text-gray-300 font-light">客戶滿意度</div>
+          <div class="text-sm md:text-base lg:text-lg text-gray-300 font-light">客戶滿意度</div>
         </div>
       </div>
 
       <!-- Subtitle -->
-      <p class="hero-subtitle text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto opacity-0 translate-y-10 delay-150"
+      <p class="hero-subtitle text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 md:mb-10 max-w-3xl mx-auto opacity-0 translate-y-10 delay-150 leading-relaxed"
          :class="{ 'animate-fade-in-up': isVisible }">
-        全方位保障，透明費率，專業服務<br>
+        全方位保障，透明費率，專業服務<br class="hidden md:block">
         讓您的電動車之旅更加安心
       </p>
 
       <!-- CTA Button -->
-      <div class="cta-container opacity-0 translate-y-10 delay-200"
+      <div class="cta-container opacity-0 translate-y-10 delay-200 mb-16 md:mb-20"
            :class="{ 'animate-fade-in-up': isVisible }">
+
         <button
           @click="scrollToCalculator"
-          class="btn-primary text-lg px-12 py-4 mb-4">
+          class="btn-primary text-base md:text-lg px-10 md:px-12 py-3 md:py-4 mb-4 md:mb-6">
           立即取得免費報價
         </button>
 
         <!-- Benefits Line -->
-        <div class="benefits-line flex items-center justify-center gap-6 text-sm text-gray-400 mb-8">
+        <div class="benefits-line flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-gray-400 mb-6 md:mb-8 px-4">
           <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
-            免費諮詢
+            <span class="whitespace-nowrap">免費諮詢</span>
           </span>
           <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
-            24 小時回覆
+            <span class="whitespace-nowrap">24 小時回覆</span>
           </span>
           <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
-            隱私保護
+            <span class="whitespace-nowrap">隱私保護</span>
           </span>
         </div>
 
         <!-- Trust Badges - 信任標章 -->
-        <div class="trust-badges flex flex-col md:flex-row items-center justify-center gap-6 text-gray-400">
+        <div class="trust-badges flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-gray-400 text-xs md:text-sm">
           <div class="flex items-center gap-2">
-            <svg class="w-6 h-6 text-tesla-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-tesla-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
-            <span class="text-sm">專業保險經紀人證照</span>
+            <span class="whitespace-nowrap">專業保險經紀人證照</span>
           </div>
 
           <div class="flex items-center gap-2">
-            <svg class="w-6 h-6 text-tesla-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-tesla-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
             </svg>
-            <span class="text-sm">合作 10+ 家保險公司</span>
+            <span class="whitespace-nowrap">合作 10+ 家保險公司</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Scroll indicator - 固定在畫面底部 -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 opacity-0 delay-300"
+    <!-- Scroll indicator - 固定在畫面最底部，獨立於內容 -->
+    <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 opacity-0 delay-300"
          :class="{ 'animate-fade-in': isVisible }">
       <div class="scroll-indicator flex flex-col items-center text-gray-400 hover:text-white transition-colors cursor-pointer"
            @click="scrollToCalculator">
-        <span class="text-sm mb-2">向下探索</span>
-        <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span class="text-xs md:text-sm mb-2">向下探索</span>
+        <svg class="w-5 h-5 md:w-6 md:h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
       </div>
@@ -240,5 +243,10 @@ const scrollToCalculator = () => {
 .stat-card:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.08);
+}
+
+/* 確保向下探索按鈕有足夠的視覺空間 */
+.scroll-indicator {
+  padding: 0.5rem;
 }
 </style>
