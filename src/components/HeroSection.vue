@@ -90,68 +90,19 @@
         </div>
 
         <!-- Trust Badges - 信任標章 -->
-        <div class="trust-badges flex flex-col items-center justify-center gap-4 text-gray-400 mb-8">
+        <div class="trust-badges flex flex-col md:flex-row items-center justify-center gap-6 text-gray-400">
           <div class="flex items-center gap-2">
             <svg class="w-6 h-6 text-tesla-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
             <span class="text-sm">專業保險經紀人證照</span>
           </div>
-        </div>
 
-        <!-- 合作產險公司 LOGO -->
-        <div class="insurance-partners">
-          <p class="text-sm text-gray-400 mb-4 text-center">合作台灣知名產險公司</p>
-          <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-4xl mx-auto">
-            <!-- 富邦產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-blue-700 font-bold text-sm md:text-base whitespace-nowrap">富邦產險</span>
-            </div>
-
-            <!-- 國泰產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-green-700 font-bold text-sm md:text-base whitespace-nowrap">國泰產險</span>
-            </div>
-
-            <!-- 新光產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-red-600 font-bold text-sm md:text-base whitespace-nowrap">新光產險</span>
-            </div>
-
-            <!-- 南山產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-orange-600 font-bold text-sm md:text-base whitespace-nowrap">南山產險</span>
-            </div>
-
-            <!-- 明台產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-indigo-700 font-bold text-sm md:text-base whitespace-nowrap">明台產險</span>
-            </div>
-
-            <!-- 泰安產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-teal-700 font-bold text-sm md:text-base whitespace-nowrap">泰安產險</span>
-            </div>
-
-            <!-- 華南產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-blue-600 font-bold text-sm md:text-base whitespace-nowrap">華南產險</span>
-            </div>
-
-            <!-- 旺旺友聯 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-red-700 font-bold text-sm md:text-base whitespace-nowrap">旺旺友聯</span>
-            </div>
-
-            <!-- 和泰產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-gray-800 font-bold text-sm md:text-base whitespace-nowrap">和泰產險</span>
-            </div>
-
-            <!-- 第一產險 -->
-            <div class="partner-logo bg-white/90 px-4 py-3 rounded-lg hover:bg-white transition-all duration-300 shadow-md">
-              <span class="text-purple-700 font-bold text-sm md:text-base whitespace-nowrap">第一產險</span>
-            </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-6 h-6 text-tesla-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+            <span class="text-sm">合作 10+ 家保險公司</span>
           </div>
         </div>
       </div>
@@ -289,15 +240,5 @@ const scrollToCalculator = () => {
 .stat-card:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.08);
-}
-
-/* Partner logos hover effect */
-.partner-logo {
-  transition: all 0.3s ease;
-}
-
-.partner-logo:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 </style>
