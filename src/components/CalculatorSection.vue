@@ -133,31 +133,37 @@
 import { ref, computed } from 'vue'
 
 // Car models with images from Unsplash (high-quality Tesla images)
+// 圖片來源：Unsplash - 免費高品質特斯拉照片
 const carModels = [
   {
     name: 'Model 3',
     type: '入門轎車',
-    image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400&h=300&fit=crop'
+    // Model 3 紅色側面照
+    image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=800&h=600&auto=format&fit=crop'
   },
   {
     name: 'Model Y',
     type: 'SUV',
-    image: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=400&h=300&fit=crop'
+    // Model Y 白色側面照
+    image: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=800&h=600&auto=format&fit=crop'
   },
   {
     name: 'Model S',
     type: '豪華轎車',
-    image: 'https://images.unsplash.com/photo-1617704548623-340376564e68?w=400&h=300&fit=crop'
+    // Model S 銀色側面照
+    image: 'https://images.unsplash.com/photo-1617704548623-340376564e68?q=80&w=800&h=600&auto=format&fit=crop'
   },
   {
     name: 'Model X',
     type: '豪華 SUV',
-    image: 'https://images.unsplash.com/photo-1571800835528-4dcb96c7d1b2?w=400&h=300&fit=crop'
+    // Model X 黑色側面照（鷹翼門）
+    image: 'https://images.unsplash.com/photo-1583267746897-cb95d1d6b194?q=80&w=800&h=600&auto=format&fit=crop'
   },
   {
     name: 'Cybertruck',
     type: '電動皮卡',
-    image: 'https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?w=400&h=300&fit=crop'
+    // Cybertruck 銀色側面照
+    image: 'https://images.unsplash.com/photo-1623641362687-808095da0cd9?q=80&w=800&h=600&auto=format&fit=crop'
   }
 ]
 

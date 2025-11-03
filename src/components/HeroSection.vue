@@ -2,16 +2,21 @@
   <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background with overlay -->
     <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-b from-tesla-dark via-tesla-dark/95 to-tesla-dark z-10"></div>
-      <!-- Background image placeholder - can be replaced with actual Tesla image -->
-      <div class="w-full h-full bg-gradient-to-br from-gray-900 via-tesla-gray to-gray-800"></div>
+      <!-- Tesla background image -->
+      <img
+        src="https://images.unsplash.com/photo-1617704548623-340376564e68?q=80&w=2000&auto=format&fit=crop"
+        alt="Tesla Car"
+        class="w-full h-full object-cover"
+      />
+      <!-- Dark overlay for better text readability -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-tesla-dark z-10"></div>
     </div>
 
     <!-- Content -->
     <div class="relative z-20 text-center px-6 md:px-12 max-w-5xl mx-auto">
-      <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 translate-y-10"
+      <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 translate-y-10 leading-tight"
           :class="{ 'animate-fade-in-up': isVisible }">
-        專為特斯拉車主設計的<br>保險方案
+        專為特斯拉車主設計的保險方案
       </h1>
 
       <p class="hero-subtitle text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto opacity-0 translate-y-10 delay-100"
