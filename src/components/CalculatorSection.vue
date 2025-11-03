@@ -92,8 +92,26 @@
 
             <!-- 右側：車輛展示區 -->
             <div class="relative h-48 md:h-64 flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700">
+
+              <!-- Loading Skeleton -->
+              <div v-if="imageLoading && selectedModel" class="absolute inset-0 flex items-center justify-center">
+                <div class="animate-pulse flex flex-col items-center gap-4">
+                  <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-700/50 rounded-lg"></div>
+                  <div class="w-24 h-3 bg-gray-700/50 rounded"></div>
+                </div>
+              </div>
+
+              <!-- Error Fallback -->
+              <div v-else-if="imageError && selectedModel" class="text-center text-gray-500">
+                <svg class="w-16 h-16 mx-auto mb-4 text-red-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-sm">圖片載入失敗</p>
+                <p class="text-xs mt-1 text-gray-600">{{ selectedModel.name }}</p>
+              </div>
+
               <!-- 預設提示 -->
-              <div v-if="!selectedModel" class="text-center text-gray-500">
+              <div v-else-if="!selectedModel" class="text-center text-gray-500">
                 <svg class="w-20 h-20 mx-auto mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -102,11 +120,16 @@
 
               <!-- 車輛圖片 - 從右側滑入 -->
               <transition name="slide-in-right">
-                <div v-if="selectedModel" :key="selectedModel.name" class="absolute inset-0 flex items-center justify-center p-4">
+                <div v-if="selectedModel && !imageLoading && !imageError"
+                     :key="selectedModel.name"
+                     class="absolute inset-0 flex items-center justify-center p-4">
                   <img
                     :src="selectedModel.displayImage"
-                    :alt="selectedModel.name"
+                    :alt="`${selectedModel.name} - ${selectedModel.type}`"
                     class="max-w-full max-h-full object-contain drop-shadow-2xl"
+                    loading="eager"
+                    @load="imageLoading = false"
+                    @error="imageError = true; imageLoading = false"
                   />
                 </div>
               </transition>
@@ -293,16 +316,61 @@ const carModels = [
 const years = Array.from({ length: 8 }, (_, i) => 2025 - i)
 const purchaseYears = Array.from({ length: 8 }, (_, i) => 2025 - i)
 
-const selectedModelName = ref('')
+// 設定預設值
+const selectedModelName = ref('Model 3')
 const selectedModel = ref(null)
-const selectedYear = ref('')
-const purchaseMonth = ref('')
-const purchaseYear = ref('')
+const selectedYear = ref('2024')
+const purchaseMonth = ref('1')
+const purchaseYear = ref('2024')
 const budget = ref(50000)
+
+// 圖片載入狀態
+const imageLoading = ref(true)
+const imageError = ref(false)
+const imageLoaded = ref({})
+
+// 圖片預載入函數
+const preloadImage = (src) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      imageLoaded.value[src] = true
+      resolve(src)
+    }
+    img.onerror = () => {
+      imageLoaded.value[src] = false
+      reject(src)
+    }
+    img.src = src
+  })
+}
 
 // 處理車款變更
 const handleModelChange = () => {
-  selectedModel.value = carModels.find(m => m.name === selectedModelName.value) || null
+  imageLoading.value = true
+  imageError.value = false
+  const model = carModels.find(m => m.name === selectedModelName.value) || null
+  selectedModel.value = model
+
+  // 預載入新選擇的圖片
+  if (model && model.displayImage) {
+    preloadImage(model.displayImage)
+      .then(() => {
+        imageLoading.value = false
+      })
+      .catch(() => {
+        imageLoading.value = false
+        imageError.value = true
+      })
+  }
+}
+
+// 預載入所有車款圖片
+const preloadAllImages = async () => {
+  const imagePromises = carModels.map(model =>
+    preloadImage(model.displayImage).catch(() => null)
+  )
+  await Promise.allSettled(imagePromises)
 }
 
 const showResults = computed(() => {
@@ -379,6 +447,15 @@ const coverageItems = computed(() => {
   }
 
   return base
+})
+
+// 組件掛載時初始化
+onMounted(async () => {
+  // 設定預設車款為 Model 3
+  handleModelChange()
+
+  // 背景預載入所有圖片（不阻塞）
+  preloadAllImages()
 })
 </script>
 
