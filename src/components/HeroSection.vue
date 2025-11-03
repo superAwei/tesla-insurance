@@ -31,16 +31,17 @@
         :class="{ 'animate-fade-in-up': isVisible }">
         立即規劃保險方案
       </button>
+    </div>
 
-      <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 delay-300"
-           :class="{ 'animate-fade-in': isVisible }">
-        <div class="scroll-indicator flex flex-col items-center text-gray-400">
-          <span class="text-sm mb-2">向下探索</span>
-          <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
+    <!-- Scroll indicator - 固定在畫面底部 -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 opacity-0 delay-300"
+         :class="{ 'animate-fade-in': isVisible }">
+      <div class="scroll-indicator flex flex-col items-center text-gray-400 hover:text-white transition-colors cursor-pointer"
+           @click="scrollToCalculator">
+        <span class="text-sm mb-2">向下探索</span>
+        <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
       </div>
     </div>
   </section>

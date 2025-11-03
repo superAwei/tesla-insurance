@@ -11,31 +11,55 @@
         <!-- Step 1: Car Model Selection -->
         <div class="mb-12">
           <label class="block text-2xl font-semibold mb-6">選擇車型</label>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <div
-              v-for="model in carModels"
-              :key="model.name"
-              @click="selectedModel = model"
-              class="car-card cursor-pointer rounded-xl overflow-hidden border-2 transition-all duration-300 transform hover:scale-105"
-              :class="selectedModel?.name === model.name
-                ? 'border-tesla-red shadow-lg shadow-tesla-red/30'
-                : 'border-gray-700 hover:border-gray-500'">
-              <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                <img
-                  :src="model.image"
-                  :alt="model.name"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div v-if="selectedModel?.name === model.name"
-                     class="absolute top-2 right-2 bg-tesla-red text-white w-6 h-6 rounded-full flex items-center justify-center">
-                  ✓
+
+          <!-- 下拉選單 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <!-- 左側：下拉選單 -->
+            <div>
+              <select
+                v-model="selectedModelName"
+                @change="handleModelChange"
+                class="w-full px-6 py-5 bg-tesla-gray border-2 border-gray-600 rounded-lg text-white text-lg
+                       focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all
+                       cursor-pointer hover:border-gray-500">
+                <option value="">請選擇您的特斯拉車款</option>
+                <option v-for="model in carModels" :key="model.name" :value="model.name">
+                  {{ model.name }} - {{ model.type }}
+                </option>
+              </select>
+
+              <!-- 車款資訊 -->
+              <div v-if="selectedModel" class="mt-6 p-6 bg-tesla-gray/50 rounded-lg border border-gray-600">
+                <h3 class="text-2xl font-bold text-white mb-2">{{ selectedModel.name }}</h3>
+                <p class="text-gray-300 mb-4">{{ selectedModel.type }}</p>
+                <div class="space-y-2 text-sm text-gray-400">
+                  <p>✓ 專業電動車保障</p>
+                  <p>✓ 電池保固涵蓋</p>
+                  <p>✓ 充電設備保險</p>
                 </div>
               </div>
-              <div class="p-4 text-center bg-tesla-gray/30">
-                <h3 class="font-semibold text-lg">{{ model.name }}</h3>
-                <p class="text-sm text-gray-400">{{ model.type }}</p>
+            </div>
+
+            <!-- 右側：車輛展示區 -->
+            <div class="relative h-64 md:h-80 flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700">
+              <!-- 預設提示 -->
+              <div v-if="!selectedModel" class="text-center text-gray-500">
+                <svg class="w-20 h-20 mx-auto mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+                <p class="text-lg">選擇車款以預覽</p>
               </div>
+
+              <!-- 車輛圖片 - 從右側滑入 -->
+              <transition name="slide-in-right">
+                <div v-if="selectedModel" :key="selectedModel.name" class="absolute inset-0 flex items-center justify-center p-4">
+                  <img
+                    :src="selectedModel.displayImage"
+                    :alt="selectedModel.name"
+                    class="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  />
+                </div>
+              </transition>
             </div>
           </div>
         </div>
@@ -132,49 +156,57 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// Car models with images from Unsplash (high-quality Tesla images)
-// 圖片來源：Unsplash - 免費高品質特斯拉照片
+// Car models with images
+// 圖片來源：PNG 去背車輛圖片，展現賽車遊戲風格
 const carModels = [
   {
     name: 'Model 3',
     type: '入門轎車',
-    // Model 3 紅色側面照
-    image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=800&h=600&auto=format&fit=crop'
+    // 縮圖用（有背景）
+    image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=800&h=600&auto=format&fit=crop',
+    // 大圖展示用（去背 PNG）
+    displayImage: 'https://www.pngmart.com/files/22/Tesla-Model-3-PNG-Isolated-Photo.png'
   },
   {
     name: 'Model Y',
     type: 'SUV',
-    // Model Y 白色側面照
-    image: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=800&h=600&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=800&h=600&auto=format&fit=crop',
+    displayImage: 'https://www.pngmart.com/files/22/Tesla-Model-Y-PNG-Photo.png'
   },
   {
     name: 'Model S',
     type: '豪華轎車',
-    // Model S 銀色側面照
-    image: 'https://images.unsplash.com/photo-1617704548623-340376564e68?q=80&w=800&h=600&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1617704548623-340376564e68?q=80&w=800&h=600&auto=format&fit=crop',
+    displayImage: 'https://www.pngmart.com/files/22/Tesla-Model-S-PNG-Isolated-File.png'
   },
   {
     name: 'Model X',
     type: '豪華 SUV',
-    // Model X 黑色側面照（鷹翼門）
-    image: 'https://images.unsplash.com/photo-1583267746897-cb95d1d6b194?q=80&w=800&h=600&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1583267746897-cb95d1d6b194?q=80&w=800&h=600&auto=format&fit=crop',
+    displayImage: 'https://www.pngmart.com/files/22/Tesla-Model-X-Transparent-PNG.png'
   },
   {
     name: 'Cybertruck',
     type: '電動皮卡',
-    // Cybertruck 銀色側面照
-    image: 'https://images.unsplash.com/photo-1623641362687-808095da0cd9?q=80&w=800&h=600&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1623641362687-808095da0cd9?q=80&w=800&h=600&auto=format&fit=crop',
+    displayImage: 'https://www.pngmart.com/files/23/Tesla-Cybertruck-PNG-Image.png'
   }
 ]
 
 const years = Array.from({ length: 8 }, (_, i) => 2025 - i)
 const purchaseYears = Array.from({ length: 8 }, (_, i) => 2025 - i)
 
+const selectedModelName = ref('')
 const selectedModel = ref(null)
 const selectedYear = ref('')
 const purchaseMonth = ref('')
 const purchaseYear = ref('')
 const budget = ref(50000)
+
+// 處理車款變更
+const handleModelChange = () => {
+  selectedModel.value = carModels.find(m => m.name === selectedModelName.value) || null
+}
 
 const showResults = computed(() => {
   return selectedModel.value && selectedYear.value && purchaseMonth.value && purchaseYear.value
@@ -236,5 +268,40 @@ const coverageItems = computed(() => {
 .slider::-moz-range-thumb:hover {
   transform: scale(1.2);
   box-shadow: 0 0 20px rgba(232, 33, 39, 0.8);
+}
+
+/* 賽車遊戲風格 - 車輛從右側滑入動畫 */
+.slide-in-right-enter-active {
+  animation: slideInFromRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-in-right-leave-active {
+  animation: slideOutToLeft 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(120%) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-5%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120%) scale(0.8);
+    opacity: 0;
+  }
 }
 </style>
