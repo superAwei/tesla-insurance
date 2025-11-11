@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-section section-padding bg-tesla-dark">
+  <section id="contact" class="contact-section section-padding bg-tesla-dark">
     <div class="max-w-4xl mx-auto">
       <!-- Section Title -->
       <div class="text-center mb-12">
@@ -39,6 +39,8 @@
               @input="clearError('name')"
               type="text"
               required
+              :aria-invalid="!!errors.name"
+              :aria-describedby="errors.name ? 'name-error' : undefined"
               class="w-full px-4 md:px-6 py-3 md:py-4 bg-tesla-gray border rounded-lg text-white
                      focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12"
               :class="getFieldClass('name')"
@@ -51,8 +53,8 @@
               </svg>
             </div>
           </div>
-          <p v-if="errors.name" class="text-red-400 text-sm mt-2 flex items-center gap-1">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <p v-if="errors.name" id="name-error" class="text-red-400 text-sm mt-2 flex items-center gap-1" role="alert">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
             </svg>
             {{ errors.name }}
@@ -72,6 +74,8 @@
               @input="clearError('phone')"
               type="tel"
               required
+              :aria-invalid="!!errors.phone"
+              :aria-describedby="errors.phone ? 'phone-error' : undefined"
               class="w-full px-4 md:px-6 py-3 md:py-4 bg-tesla-gray border rounded-lg text-white
                      focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12"
               :class="getFieldClass('phone')"
@@ -79,13 +83,13 @@
             />
             <!-- 驗證圖標 -->
             <div class="absolute right-4 top-1/2 -translate-y-1/2">
-              <svg v-if="validFields.phone" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <svg v-if="validFields.phone" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
             </div>
           </div>
-          <p v-if="errors.phone" class="text-red-400 text-sm mt-2 flex items-center gap-1">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <p v-if="errors.phone" id="phone-error" class="text-red-400 text-sm mt-2 flex items-center gap-1" role="alert">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
             </svg>
             {{ errors.phone }}
@@ -105,6 +109,8 @@
               @input="clearError('email')"
               type="email"
               required
+              :aria-invalid="!!errors.email"
+              :aria-describedby="errors.email ? 'email-error' : undefined"
               class="w-full px-4 md:px-6 py-3 md:py-4 bg-tesla-gray border rounded-lg text-white
                      focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12"
               :class="getFieldClass('email')"
@@ -112,13 +118,13 @@
             />
             <!-- 驗證圖標 -->
             <div class="absolute right-4 top-1/2 -translate-y-1/2">
-              <svg v-if="validFields.email" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <svg v-if="validFields.email" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
             </div>
           </div>
-          <p v-if="errors.email" class="text-red-400 text-sm mt-2 flex items-center gap-1">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <p v-if="errors.email" id="email-error" class="text-red-400 text-sm mt-2 flex items-center gap-1" role="alert">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
             </svg>
             {{ errors.email }}
@@ -129,15 +135,40 @@
         <div class="mb-6">
           <label for="carInfo" class="block text-base md:text-lg font-semibold mb-2">
             車輛資訊
+            <span v-if="isCarInfoAutoFilled" class="ml-2 text-sm font-normal text-green-400 inline-flex items-center gap-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              已自動帶入
+            </span>
           </label>
-          <input
-            id="carInfo"
-            v-model="formData.carInfo"
-            type="text"
-            class="w-full px-4 md:px-6 py-3 md:py-4 bg-tesla-gray border border-gray-600 rounded-lg text-white
-                   focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all"
-            placeholder="例：Model 3 2023"
-          />
+          <div class="relative">
+            <input
+              id="carInfo"
+              v-model="formData.carInfo"
+              type="text"
+              class="w-full px-4 md:px-6 py-3 md:py-4 rounded-lg text-white
+                     focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all"
+              :class="isCarInfoAutoFilled
+                ? 'bg-green-900/10 border-2 border-green-500/50'
+                : 'bg-tesla-gray border border-gray-600'"
+              placeholder="例：Model 3 2023年"
+            />
+            <!-- 自動帶入圖標 -->
+            <div v-if="isCarInfoAutoFilled" class="absolute right-4 top-1/2 -translate-y-1/2">
+              <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <!-- 提示文字 -->
+          <p v-if="isCarInfoAutoFilled" class="text-xs text-green-400 mt-2 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+            此資訊已從上方「保險方案試算」自動帶入，您可以直接使用或修改
+          </p>
         </div>
 
         <!-- Message -->
@@ -194,8 +225,12 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import emailjs from '@emailjs/browser'
+import { useVehicleData } from '../composables/useVehicleData'
+
+// 使用車輛資料 composable
+const { vehicleData, formattedVehicleInfo, hasVehicleData } = useVehicleData()
 
 const formData = reactive({
   name: '',
@@ -204,6 +239,9 @@ const formData = reactive({
   carInfo: '',
   message: ''
 })
+
+// 標記車輛資訊是否為自動帶入
+const isCarInfoAutoFilled = ref(false)
 
 const errors = reactive({
   name: '',
@@ -349,7 +387,36 @@ const resetForm = () => {
   formData.email = ''
   formData.carInfo = ''
   formData.message = ''
+  isCarInfoAutoFilled.value = false
 }
+
+// 組件掛載時自動填入車輛資訊（如果有的話）
+onMounted(() => {
+  if (hasVehicleData.value && formattedVehicleInfo.value) {
+    formData.carInfo = formattedVehicleInfo.value
+    isCarInfoAutoFilled.value = true
+  }
+})
+
+// 監聽車輛資料變化，自動更新表單
+watch(formattedVehicleInfo, (newValue, oldValue) => {
+  if (newValue) {
+    // 情況1: 表單欄位為空 -> 直接填入
+    // 情況2: 目前是自動填入狀態 -> 持續更新
+    if (!formData.carInfo || isCarInfoAutoFilled.value) {
+      formData.carInfo = newValue
+      isCarInfoAutoFilled.value = true
+    }
+  }
+})
+
+// 當用戶手動修改車輛資訊時，移除自動填入標記
+watch(() => formData.carInfo, (newValue, oldValue) => {
+  if (isCarInfoAutoFilled.value && newValue !== formattedVehicleInfo.value) {
+    // 用戶手動修改了內容，移除自動填入標記
+    isCarInfoAutoFilled.value = false
+  }
+})
 </script>
 
 <style scoped>

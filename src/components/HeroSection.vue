@@ -1,10 +1,10 @@
 <template>
-  <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden pb-24">
+  <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background with overlay -->
     <div class="absolute inset-0 z-0">
       <!-- Tesla background image -->
       <img
-        src="https://images.unsplash.com/photo-1617704548623-340376564e68?q=80&w=2000&auto=format&fit=crop"
+        src="/images/cars/homepage.jpg"
         alt="Tesla Car"
         class="w-full h-full object-cover"
       />
@@ -12,8 +12,8 @@
       <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-tesla-dark z-10"></div>
     </div>
 
-    <!-- Content Container - 加上底部間距避免遮擋 -->
-    <div class="relative z-20 text-center px-6 md:px-12 max-w-6xl mx-auto py-12 md:py-20 mb-20 md:mb-24">
+    <!-- Content Container -->
+    <div class="relative z-20 text-center px-6 md:px-12 max-w-6xl mx-auto pt-24 md:pt-32 pb-8 md:pb-12 mb-6 md:mb-8">
 
       <!-- Main Title -->
       <h1 class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 opacity-0 translate-y-10 leading-tight"
@@ -22,7 +22,7 @@
       </h1>
 
       <!-- Social Proof Stats - 社會證明數字列 -->
-      <div class="stats-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10 max-w-5xl mx-auto opacity-0 translate-y-10 delay-100"
+      <div class="stats-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8 max-w-5xl mx-auto opacity-0 translate-y-10 delay-100"
            :class="{ 'animate-fade-in-up': isVisible }">
 
         <!-- 服務車主 -->
@@ -54,14 +54,14 @@
       </div>
 
       <!-- Subtitle -->
-      <p class="hero-subtitle text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 md:mb-10 max-w-3xl mx-auto opacity-0 translate-y-10 delay-150 leading-relaxed"
+      <p class="hero-subtitle text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 md:mb-8 max-w-3xl mx-auto opacity-0 translate-y-10 delay-150 leading-relaxed"
          :class="{ 'animate-fade-in-up': isVisible }">
         全方位保障，透明費率，專業服務<br class="hidden md:block">
         讓您的電動車之旅更加安心
       </p>
 
       <!-- CTA Button -->
-      <div class="cta-container opacity-0 translate-y-10 delay-200 mb-16 md:mb-20"
+      <div class="cta-container opacity-0 translate-y-10 delay-200 mb-6 md:mb-8"
            :class="{ 'animate-fade-in-up': isVisible }">
 
         <button
@@ -109,17 +109,17 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Scroll indicator - 固定在畫面最底部，獨立於內容 -->
-    <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 opacity-0 delay-300"
-         :class="{ 'animate-fade-in': isVisible }">
-      <div class="scroll-indicator flex flex-col items-center text-gray-400 hover:text-white transition-colors cursor-pointer"
-           @click="scrollToCalculator">
-        <span class="text-xs md:text-sm mb-2">向下探索</span>
-        <svg class="w-5 h-5 md:w-6 md:h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
+      <!-- Scroll indicator - 放在內容區域底部 -->
+      <div class="mt-8 md:mt-12 opacity-0 delay-300"
+           :class="{ 'animate-fade-in': isVisible }">
+        <div class="scroll-indicator flex flex-col items-center text-gray-400 hover:text-white transition-colors cursor-pointer"
+             @click="scrollToCalculator">
+          <span class="text-xs md:text-sm mb-2">向下探索</span>
+          <svg class="w-5 h-5 md:w-6 md:h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
       </div>
     </div>
   </section>

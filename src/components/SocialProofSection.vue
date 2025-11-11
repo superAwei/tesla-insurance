@@ -86,25 +86,30 @@
           <!-- 輪播控制按鈕 -->
           <button
             @click="prevSlide"
+            aria-label="查看上一則客戶評價"
             class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 md:w-12 md:h-12 bg-tesla-gray/80 hover:bg-tesla-red rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm border border-gray-600">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
             </svg>
           </button>
           <button
             @click="nextSlide"
+            aria-label="查看下一則客戶評價"
             class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 md:w-12 md:h-12 bg-tesla-gray/80 hover:bg-tesla-red rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm border border-gray-600">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
           </button>
 
           <!-- 輪播指示器 -->
-          <div class="flex justify-center gap-2 mt-8">
+          <div class="flex justify-center gap-2 mt-8" role="tablist" aria-label="客戶評價選擇">
             <button
               v-for="(_, index) in testimonials"
               :key="index"
               @click="currentSlide = index"
+              :aria-label="`查看第 ${index + 1} 則評價`"
+              :aria-selected="currentSlide === index"
+              role="tab"
               class="h-1.5 rounded-full transition-all duration-300"
               :class="currentSlide === index ? 'bg-tesla-red w-10' : 'bg-gray-600 hover:bg-gray-500 w-1.5'">
             </button>
@@ -126,13 +131,13 @@ const testimonialsRef = ref(null)
 // 客戶見證資料
 const testimonials = [
   {
-    content: '陳先生幫我比較了 7 家保險公司，最後省下 2 萬多！非常專業，而且很有耐心解釋每個方案的差異。強烈推薦給所有特斯拉車主！',
+    content: '團隊幫我比較了 7 家保險公司，最後省下 2 萬多！非常專業，而且很有耐心解釋每個方案的差異。強烈推薦給所有特斯拉車主！',
     name: '張先生',
     car: 'Model 3',
     location: '台北'
   },
   {
-    content: '第一次買電動車，對保險完全不懂。陳先生從電池保固到充電設備都幫我規劃得很完善，理賠時也協助處理，真的很感謝！',
+    content: '第一次買電動車，對保險完全不懂。團隊從電池保固到充電設備都幫我規劃得很完善，理賠時也協助處理，真的很感謝！',
     name: '李小姐',
     car: 'Model Y',
     location: '新竹'

@@ -23,3 +23,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test screenshots (not needed in production)
+1.jpg
+2.jpg
+web.jpg
