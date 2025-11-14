@@ -3,8 +3,8 @@
     <div class="max-w-7xl mx-auto">
       <!-- Section Title -->
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">保險方案試算</h2>
-        <p class="text-xl text-gray-600">選擇您的愛車，立即取得專屬報價</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">取得您的專屬 Tesla 保險方案</h2>
+        <p class="text-xl text-gray-600">三步驟取得最適合的保障</p>
       </div>
 
       <div class="calculator-container">
@@ -28,7 +28,12 @@
 
         <!-- Step 1: Car Model Selection -->
         <div class="mb-8">
-          <label class="block text-lg md:text-xl font-semibold mb-4 text-gray-900">選擇車型</label>
+          <label class="block text-lg md:text-xl font-semibold mb-4 text-gray-900">
+            <span class="inline-flex items-center gap-2">
+              <span class="step-number">①</span>
+              選擇您的 Tesla 車型
+            </span>
+          </label>
 
           <!-- 下拉選單 -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
@@ -100,7 +105,7 @@
           </div>
         </div>
 
-        <!-- Step 2: Year Selection -->
+        <!-- Year Selection -->
         <div class="mb-6">
           <label class="block text-base md:text-lg font-semibold mb-3 text-gray-900">車款年份</label>
           <select
@@ -112,32 +117,17 @@
           </select>
         </div>
 
-        <!-- Step 3: Purchase Date -->
-        <div class="mb-6">
-          <label class="block text-base md:text-lg font-semibold mb-3 text-gray-900">購入時間</label>
-          <div class="flex gap-3">
-            <select
-              v-model="purchaseMonth"
-              class="flex-1 md:flex-none md:w-40 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
-                     focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all">
-              <option value="">月份</option>
-              <option v-for="month in 12" :key="month" :value="month">{{ month }} 月</option>
-            </select>
-            <select
-              v-model="purchaseYear"
-              class="flex-1 md:flex-none md:w-40 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
-                     focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all">
-              <option value="">年份</option>
-              <option v-for="year in purchaseYears" :key="year" :value="year">{{ year }} 年</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Step 4: Budget Slider -->
+        <!-- Step 2: Budget Slider -->
         <div class="mb-8">
           <label class="block text-base md:text-lg font-semibold mb-3 text-gray-900">
-            保費預算
-            <span class="text-tesla-red ml-3 text-2xl md:text-3xl font-bold">NT$ {{ budget.toLocaleString() }}</span>
+            <span class="inline-flex items-center gap-2 mb-2">
+              <span class="step-number">②</span>
+              您的預算範圍
+            </span>
+            <div class="mt-2">
+              <span class="text-gray-700 text-base">保費預算</span>
+              <span class="text-tesla-red ml-3 text-2xl md:text-3xl font-bold">NT$ {{ budget.toLocaleString() }}</span>
+            </div>
           </label>
           <div class="relative pt-2">
             <input
@@ -166,67 +156,234 @@
           </div>
         </div>
 
-        <!-- 降低承諾門檻提示 -->
-        <div v-if="showResults" class="commitment-section mb-6 p-4 md:p-5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
-          <h4 class="text-base md:text-lg font-semibold text-green-700 mb-3 text-center">安心保證</h4>
-          <div class="grid md:grid-cols-3 gap-3">
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-xs md:text-sm text-gray-700">免費諮詢，無購買壓力</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-xs md:text-sm text-gray-700">隱私保護，絕不騷擾</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-xs md:text-sm text-gray-700">24小時內專人回覆</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Results -->
-        <div v-if="showResults" class="results-panel bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-5 md:p-6 border border-tesla-red/30">
-          <h3 class="text-xl md:text-2xl font-bold mb-4 text-tesla-red">推薦保險方案</h3>
-
-          <div class="grid md:grid-cols-2 gap-4 mb-5">
-            <div class="bg-white/60 p-4 rounded-lg border border-gray-200">
-              <h4 class="font-semibold text-base mb-2 text-gray-900">車輛資訊</h4>
-              <p class="text-gray-700 text-sm">{{ selectedModel.name }} {{ selectedYear }}</p>
-              <p class="text-xs text-gray-500">購入時間：{{ purchaseYear }}/{{ purchaseMonth }}</p>
-            </div>
-            <div class="bg-white/60 p-4 rounded-lg border border-gray-200">
-              <h4 class="font-semibold text-base mb-2 text-gray-900">預估保費</h4>
-              <p class="text-2xl md:text-3xl font-bold text-tesla-red">NT$ {{ budget.toLocaleString() }}</p>
-              <p class="text-xs text-gray-500">年繳保費</p>
-            </div>
+        <!-- Step 3: Contact Information -->
+        <div class="mt-10 pt-8 border-t border-gray-200">
+          <div class="mb-6">
+            <h3 class="text-lg md:text-xl font-semibold text-gray-900">
+              <span class="inline-flex items-center gap-2">
+                <span class="step-number">③</span>
+                留下聯絡方式，我們提供專屬方案
+              </span>
+            </h3>
+            <p class="text-sm text-gray-600 mt-2">填寫以下資訊，專業顧問將在 24 小時內與您聯繫</p>
           </div>
 
-          <div class="coverage-list">
-            <h4 class="font-semibold text-base md:text-lg mb-3 text-gray-900">保障內容</h4>
-            <div class="grid md:grid-cols-2 gap-2">
-              <div v-for="item in coverageItems" :key="item" class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-tesla-red flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- 稱謂 -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                稱謂 <span class="text-tesla-red">*</span>
+              </label>
+              <div class="relative">
+                <select
+                  v-model="formData.title"
+                  @blur="validateField('title')"
+                  @change="validateField('title')"
+                  :class="getFieldClass('title')"
+                  class="w-full px-4 py-3 bg-gray-50 border-2 rounded-lg text-gray-900 text-base
+                         focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12">
+                  <option value="">請選擇</option>
+                  <option value="先生">先生</option>
+                  <option value="小姐">小姐</option>
+                </select>
+                <!-- 驗證圖標 -->
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <svg v-if="validFields.title" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <p v-if="errors.title" class="text-red-500 text-sm mt-2 flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-gray-700 text-sm">{{ item }}</span>
+                {{ errors.title }}
+              </p>
+            </div>
+
+            <!-- 姓名 -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                姓名 <span class="text-tesla-red">*</span>
+              </label>
+              <div class="relative">
+                <input
+                  type="text"
+                  v-model="formData.name"
+                  @blur="validateField('name')"
+                  @input="clearError('name')"
+                  :class="getFieldClass('name')"
+                  placeholder="請輸入您的姓名"
+                  class="w-full px-4 py-3 bg-gray-50 border-2 rounded-lg text-gray-900 text-base
+                         focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12"
+                />
+                <!-- 驗證圖標 -->
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <svg v-if="validFields.name" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <p v-if="errors.name" class="text-red-500 text-sm mt-2 flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                {{ errors.name }}
+              </p>
+            </div>
+
+            <!-- 手機號碼 -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                手機號碼 <span class="text-tesla-red">*</span>
+              </label>
+              <div class="relative">
+                <input
+                  type="tel"
+                  v-model="formData.phone"
+                  @blur="validateField('phone')"
+                  @input="clearError('phone')"
+                  :class="getFieldClass('phone')"
+                  placeholder="09xxxxxxxx"
+                  maxlength="10"
+                  class="w-full px-4 py-3 bg-gray-50 border-2 rounded-lg text-gray-900 text-base
+                         focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12"
+                />
+                <!-- 驗證圖標 -->
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <svg v-if="validFields.phone" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <p v-if="errors.phone" class="text-red-500 text-sm mt-2 flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                {{ errors.phone }}
+              </p>
+            </div>
+
+            <!-- LINE ID (選填) -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                LINE ID <span class="text-gray-400 text-xs">(選填)</span>
+              </label>
+              <input
+                type="text"
+                v-model="formData.lineId"
+                placeholder="方便我們透過 LINE 聯繫您"
+                class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-300 rounded-lg text-gray-900 text-base
+                       focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all"
+              />
+            </div>
+
+            <!-- 方便聯絡時段 -->
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                方便聯絡時段 <span class="text-tesla-red">*</span>
+              </label>
+              <div class="relative">
+                <select
+                  v-model="formData.contactTime"
+                  @blur="validateField('contactTime')"
+                  @change="validateField('contactTime')"
+                  :class="getFieldClass('contactTime')"
+                  class="w-full px-4 py-3 bg-gray-50 border-2 rounded-lg text-gray-900 text-base
+                         focus:border-tesla-red focus:outline-none focus:ring-2 focus:ring-tesla-red/50 transition-all pr-12">
+                  <option value="">請選擇</option>
+                  <option value="平日白天">平日白天 (9:00-18:00)</option>
+                  <option value="平日晚上">平日晚上 (18:00-21:00)</option>
+                  <option value="週末">週末 (9:00-18:00)</option>
+                </select>
+                <!-- 驗證圖標 -->
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <svg v-if="validFields.contactTime" class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <p v-if="errors.contactTime" class="text-red-500 text-sm mt-2 flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                {{ errors.contactTime }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="mt-8">
+            <button
+              @click="handleSubmit"
+              :disabled="isSubmitting"
+              class="w-full px-8 py-4 text-lg font-semibold bg-gradient-to-r from-tesla-red to-red-600 text-white rounded-lg
+                     hover:from-red-600 hover:to-tesla-red transition-all duration-300 transform hover:scale-[1.02]
+                     disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl
+                     relative overflow-hidden group">
+              <span class="relative z-10 flex items-center justify-center gap-2">
+                <span v-if="!isSubmitting">取得專屬報價方案</span>
+                <span v-else class="flex items-center gap-2">
+                  <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>送出中...</span>
+                </span>
+              </span>
+            </button>
+
+            <!-- Trust Indicators -->
+            <div class="mt-4 text-center text-sm text-gray-600">
+              <div class="flex items-center justify-center gap-4 flex-wrap">
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  免費諮詢
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  24小時內回覆
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  資料保密
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Success Message Overlay -->
+    <div v-if="showSuccess" class="success-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div class="success-message bg-white rounded-2xl p-8 md:p-12 max-w-md mx-4 text-center shadow-2xl transform animate-scale-in">
+        <div class="success-checkmark mb-6">
+          <svg class="w-20 h-20 md:w-24 md:h-24 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">已收到您的需求！</h3>
+        <p class="text-lg text-gray-700 mb-2">我們會在 24 小時內聯繫您</p>
+        <p class="text-sm text-gray-500">請留意您的手機來電</p>
+        <button
+          @click="closeSuccessMessage"
+          class="mt-6 px-6 py-2 bg-tesla-red text-white rounded-lg hover:bg-red-600 transition-colors">
+          關閉
+        </button>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { useVehicleData } from '../composables/useVehicleData'
 
 // 使用車輛資料 composable
@@ -272,15 +429,40 @@ const carModels = [
 ]
 
 const years = Array.from({ length: 8 }, (_, i) => 2025 - i)
-const purchaseYears = Array.from({ length: 8 }, (_, i) => 2025 - i)
 
 // 設定預設值
 const selectedModelName = ref('Model 3')
 const selectedModel = ref(null)
 const selectedYear = ref('2024')
-const purchaseMonth = ref('1')
-const purchaseYear = ref('2024')
 const budget = ref(50000)
+
+// 聯絡表單資料
+const formData = reactive({
+  title: '',
+  name: '',
+  phone: '',
+  lineId: '',
+  contactTime: ''
+})
+
+// 表單驗證狀態
+const errors = reactive({
+  title: '',
+  name: '',
+  phone: '',
+  contactTime: ''
+})
+
+const validFields = reactive({
+  title: false,
+  name: false,
+  phone: false,
+  contactTime: false
+})
+
+// 表單提交狀態
+const isSubmitting = ref(false)
+const showSuccess = ref(false)
 
 // 圖片載入狀態
 const imageLoading = ref(true)
@@ -332,7 +514,7 @@ const preloadAllImages = async () => {
 }
 
 const showResults = computed(() => {
-  return selectedModel.value && selectedYear.value && purchaseMonth.value && purchaseYear.value
+  return selectedModel.value && selectedYear.value
 })
 
 // 預算反饋
@@ -384,6 +566,156 @@ const coverageItems = computed(() => {
   return base
 })
 
+// 表單驗證函數
+const validateField = (field) => {
+  switch (field) {
+    case 'title':
+      if (!formData.title) {
+        errors.title = '請選擇稱謂'
+        validFields.title = false
+      } else {
+        errors.title = ''
+        validFields.title = true
+      }
+      break
+
+    case 'name':
+      if (!formData.name.trim()) {
+        errors.name = '請輸入姓名'
+        validFields.name = false
+      } else if (formData.name.trim().length < 2) {
+        errors.name = '姓名至少需要 2 個字'
+        validFields.name = false
+      } else {
+        errors.name = ''
+        validFields.name = true
+      }
+      break
+
+    case 'phone':
+      const phoneRegex = /^09\d{8}$/
+      const cleanPhone = formData.phone.replace(/[-\s]/g, '')
+      if (!cleanPhone) {
+        errors.phone = '請輸入手機號碼'
+        validFields.phone = false
+      } else if (!phoneRegex.test(cleanPhone)) {
+        errors.phone = '請輸入有效的手機號碼 (09開頭，共10位數字)'
+        validFields.phone = false
+      } else {
+        errors.phone = ''
+        validFields.phone = true
+        // 自動格式化電話號碼
+        formData.phone = cleanPhone
+      }
+      break
+
+    case 'contactTime':
+      if (!formData.contactTime) {
+        errors.contactTime = '請選擇方便聯絡的時段'
+        validFields.contactTime = false
+      } else {
+        errors.contactTime = ''
+        validFields.contactTime = true
+      }
+      break
+  }
+}
+
+// 清除錯誤訊息
+const clearError = (field) => {
+  errors[field] = ''
+}
+
+// 取得欄位的 class
+const getFieldClass = (field) => {
+  if (errors[field]) {
+    return 'border-red-500'
+  } else if (validFields[field]) {
+    return 'border-green-500'
+  } else {
+    return 'border-gray-300'
+  }
+}
+
+// 驗證所有欄位
+const validateForm = () => {
+  validateField('title')
+  validateField('name')
+  validateField('phone')
+  validateField('contactTime')
+
+  return validFields.title && validFields.name && validFields.phone && validFields.contactTime
+}
+
+// 處理表單提交
+const handleSubmit = async () => {
+  // 先驗證表單
+  if (!validateForm()) {
+    // 捲動到第一個錯誤欄位
+    const firstError = Object.keys(errors).find(key => errors[key])
+    if (firstError) {
+      const element = document.querySelector(`[name="${firstError}"]`)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        element.focus()
+      }
+    }
+    return
+  }
+
+  isSubmitting.value = true
+
+  try {
+    // 模擬提交延遲
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    // 記錄表單資料到 console（實際應用中可發送到後端）
+    console.log('表單資料:', {
+      vehicle: {
+        model: selectedModel.value?.name,
+        year: selectedYear.value
+      },
+      budget: budget.value,
+      contact: {
+        title: formData.title,
+        name: formData.name,
+        phone: formData.phone,
+        lineId: formData.lineId || '未提供',
+        contactTime: formData.contactTime
+      }
+    })
+
+    // 顯示成功訊息
+    showSuccess.value = true
+
+    // 重置表單
+    formData.title = ''
+    formData.name = ''
+    formData.phone = ''
+    formData.lineId = ''
+    formData.contactTime = ''
+
+    // 重置驗證狀態
+    Object.keys(errors).forEach(key => {
+      errors[key] = ''
+      validFields[key] = false
+    })
+
+  } catch (error) {
+    console.error('提交失敗:', error)
+    alert('提交失敗，請稍後再試')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// 關閉成功訊息
+const closeSuccessMessage = () => {
+  showSuccess.value = false
+  // 滾動到頁面頂部
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 // 組件掛載時初始化
 onMounted(async () => {
   // 設定預設車款為 Model 3
@@ -394,18 +726,47 @@ onMounted(async () => {
 })
 
 // 監聽車輛資料變化，自動同步到共享狀態
-watch([selectedModel, selectedYear, purchaseMonth, purchaseYear], () => {
+watch([selectedModel, selectedYear], () => {
   updateVehicleData({
     modelName: selectedModel.value?.name || '',
     modelType: selectedModel.value?.type || '',
-    year: selectedYear.value,
-    purchaseMonth: purchaseMonth.value,
-    purchaseYear: purchaseYear.value
+    year: selectedYear.value
   })
 })
 </script>
 
 <style scoped>
+/* Step number styling */
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #E82127 0%, #ff4146 100%);
+  color: white;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(232, 33, 39, 0.3);
+}
+
+.step-number-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #E82127 0%, #ff4146 100%);
+  color: white;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(232, 33, 39, 0.3);
+}
+
 /* Custom slider styling */
 .slider::-webkit-slider-thumb {
   appearance: none;
@@ -481,5 +842,21 @@ watch([selectedModel, selectedYear, purchaseMonth, purchaseYear], () => {
     min-width: 90%;
     min-height: 90%;
   }
+}
+
+/* Success message animation */
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out;
 }
 </style>

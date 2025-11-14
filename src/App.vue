@@ -25,7 +25,8 @@ import FooterSection from './components/FooterSection.vue'
       <CalculatorSection />
       <SocialProofSection />
       <FAQSection />
-      <ContactForm />
+      <!-- ContactForm hidden - integrated into CalculatorSection -->
+      <ContactForm v-if="false" />
     </main>
     <FooterSection />
   </div>

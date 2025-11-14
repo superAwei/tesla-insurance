@@ -60,36 +60,32 @@
         讓您的電動車之旅更加安心
       </p>
 
-      <!-- CTA Button -->
+      <!-- CTA Buttons -->
       <div class="cta-container opacity-0 translate-y-10 delay-200 mb-6 md:mb-8"
            :class="{ 'animate-fade-in-up': isVisible }">
 
-        <button
-          @click="scrollToCalculator"
-          class="btn-primary text-base md:text-lg px-10 md:px-12 py-3 md:py-4 mb-4 md:mb-6">
-          立即取得免費報價
-        </button>
+        <!-- 按鈕組 -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
+          <!-- 主要 CTA -->
+          <button
+            @click="scrollToContact"
+            class="btn-primary w-full md:w-auto px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
+            取得專屬方案
+          </button>
 
-        <!-- Benefits Line -->
-        <div class="benefits-line flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-gray-400 mb-6 md:mb-8 px-4">
-          <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span class="whitespace-nowrap">免費諮詢</span>
-          </span>
-          <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span class="whitespace-nowrap">24 小時回覆</span>
-          </span>
-          <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span class="whitespace-nowrap">隱私保護</span>
-          </span>
+          <!-- 次要 CTA -->
+          <button
+            @click="scrollToFAQ"
+            class="w-full md:w-auto px-7 py-3.5 text-base bg-transparent border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 rounded-lg transition-all duration-300">
+            常見問題
+          </button>
+        </div>
+
+        <!-- 信任指標 -->
+        <div class="mt-3 text-center text-sm text-gray-400 mb-6 md:mb-8">
+          <span>✓ 免費諮詢</span>
+          <span class="mx-3">✓ 24小時內回覆</span>
+          <span>✓ 資料保密</span>
         </div>
 
         <!-- Trust Badges - 信任標章 -->
@@ -182,10 +178,45 @@ onMounted(() => {
   }, 100)
 })
 
+const scrollToContact = () => {
+  const contact = document.getElementById('contact')
+  if (contact) {
+    const headerOffset = 80
+    const elementPosition = contact.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+const scrollToFAQ = () => {
+  const faq = document.getElementById('faq')
+  if (faq) {
+    const headerOffset = 80
+    const elementPosition = faq.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
 const scrollToCalculator = () => {
   const calculator = document.getElementById('calculator')
   if (calculator) {
-    calculator.scrollIntoView({ behavior: 'smooth' })
+    const headerOffset = 80
+    const elementPosition = calculator.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
   }
 }
 </script>
