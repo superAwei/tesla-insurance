@@ -10,8 +10,8 @@
           <a
             href="#"
             @click.prevent="scrollToTop"
-            class="text-xl md:text-2xl font-bold text-white hover:text-tesla-red transition-colors duration-300">
-            Tesla 保險專家
+            class="text-xl md:text-2xl font-bold text-white">
+            Tesla 保險諮詢站
           </a>
         </div>
 
@@ -200,7 +200,7 @@ onUnmounted(() => {
 
 /* 滾動時稍微加深背景 */
 .header-scrolled {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(32px) saturate(180%);
   -webkit-backdrop-filter: blur(32px) saturate(180%);
 }

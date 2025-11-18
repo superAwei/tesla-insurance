@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection.vue'
 import PainPointsSection from './components/PainPointsSection.vue'
 import FeaturesSection from './components/FeaturesSection.vue'
 import CalculatorSection from './components/CalculatorSection.vue'
+import ProcessSection from './components/ProcessSection.vue'
 import SocialProofSection from './components/SocialProofSection.vue'
 import FAQSection from './components/FAQSection.vue'
 import ContactForm from './components/ContactForm.vue'
@@ -23,8 +24,9 @@ import FooterSection from './components/FooterSection.vue'
       <PainPointsSection />
       <FeaturesSection />
       <CalculatorSection />
-      <SocialProofSection />
+      <ProcessSection />
       <FAQSection />
+      <SocialProofSection />
       <!-- ContactForm hidden - integrated into CalculatorSection -->
       <ContactForm v-if="false" />
     </main>

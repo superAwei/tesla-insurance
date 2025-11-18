@@ -385,6 +385,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { useVehicleData } from '../composables/useVehicleData'
+import emailjs from '@emailjs/browser'
 
 // 使用車輛資料 composable
 const { updateVehicleData } = useVehicleData()
@@ -663,27 +664,46 @@ const handleSubmit = async () => {
     return
   }
 
+  // 檢查車型和年份是否已選擇
+  if (!selectedModel.value || !selectedYear.value) {
+    alert('請先選擇車型和年份')
+    return
+  }
+
   isSubmitting.value = true
 
   try {
-    // 模擬提交延遲
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    // 準備 EmailJS 模板參數
+    const templateParams = {
+      from_name: formData.name,
+      title: formData.title,
+      phone: formData.phone,
+      line_id: formData.lineId || '未提供',
+      contact_time: formData.contactTime,
+      car_model: selectedModel.value.name,
+      car_year: selectedYear.value,
+      budget_range: `NT$ ${budget.value.toLocaleString()}`,
+      submission_time: new Date().toLocaleString('zh-TW', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      })
+    }
 
-    // 記錄表單資料到 console（實際應用中可發送到後端）
-    console.log('表單資料:', {
-      vehicle: {
-        model: selectedModel.value?.name,
-        year: selectedYear.value
-      },
-      budget: budget.value,
-      contact: {
-        title: formData.title,
-        name: formData.name,
-        phone: formData.phone,
-        lineId: formData.lineId || '未提供',
-        contactTime: formData.contactTime
-      }
-    })
+    console.log('準備發送 Email，資料:', templateParams)
+
+    // 發送 Email
+    const response = await emailjs.send(
+      'service_888',           // Service ID
+      'template_c4rbkhg',      // Template ID
+      templateParams,
+      'EsPjaV71G8VIxLRNz'      // Public Key
+    )
+
+    console.log('Email 發送成功:', response)
 
     // 顯示成功訊息
     showSuccess.value = true
@@ -702,8 +722,16 @@ const handleSubmit = async () => {
     })
 
   } catch (error) {
-    console.error('提交失敗:', error)
-    alert('提交失敗，請稍後再試')
+    console.error('Email 發送失敗:', error)
+
+    // 顯示友善的錯誤訊息
+    let errorMessage = '✗ 發送失敗，請稍後再試或直接來電'
+
+    if (error.text) {
+      console.error('錯誤詳情:', error.text)
+    }
+
+    alert(errorMessage)
   } finally {
     isSubmitting.value = false
   }
