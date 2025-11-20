@@ -12,7 +12,7 @@
         <div
           v-for="(item, index) in faqItems"
           :key="index"
-          :data-faq="index === 7 ? 'referral' : null"
+          :data-faq="index === 6 ? 'referral' : null"
           class="faq-item bg-tesla-gray/30 backdrop-blur-sm rounded-lg border border-gray-700/50 overflow-hidden
                  hover:border-tesla-red/50 transition-all duration-300">
 
@@ -61,10 +61,6 @@ const faqItems = [
   {
     question: '可以比較多家保險公司的方案嗎？',
     answer: '是的！我們與 10+ 家保險公司合作，會為您比較不同公司的方案，找出最符合您需求且價格最優惠的保險組合。'
-  },
-  {
-    question: '理賠時需要注意什麼？',
-    answer: '發生事故時請先確保人員安全，拍照記錄現場，並立即通知我們。我們提供 24/7 理賠協助服務，會全程協助您處理理賠事宜，最快 3 個工作天完成賠付。'
   },
   {
     question: '中途可以調整保險內容嗎？',
