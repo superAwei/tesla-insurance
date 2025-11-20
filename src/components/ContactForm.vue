@@ -344,7 +344,7 @@ const handleSubmit = async () => {
 
     // If credentials are not set, simulate success for demo
     if (SERVICE_ID === 'YOUR_SERVICE_ID') {
-      console.log('表單資料（示範模式）:', formData)
+      // Demo mode: simulate email sending
       await new Promise(resolve => setTimeout(resolve, 1500))
       showSuccess.value = true
       resetForm()

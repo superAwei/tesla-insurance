@@ -712,8 +712,6 @@ const handleSubmit = async () => {
       })
     }
 
-    console.log('準備發送 Email，資料:', templateParams)
-
     // 發送 Email
     const response = await emailjs.send(
       'service_888',           // Service ID
@@ -721,8 +719,6 @@ const handleSubmit = async () => {
       templateParams,
       'EsPjaV71G8VIxLRNz'      // Public Key
     )
-
-    console.log('Email 發送成功:', response)
 
     // Google Analytics 事件追蹤
     if (typeof window.gtag !== 'undefined') {

@@ -3,8 +3,11 @@
     <div class="referral-banner-card">
       <!-- Title with SVG Icon -->
       <h3 class="banner-title">
-        <svg class="gift-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/>
+        <svg class="gift-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="10" width="18" height="12" rx="1"/>
+          <rect x="3" y="10" width="18" height="4" rx="1"/>
+          <line x1="12" y1="10" x2="12" y2="22"/>
+          <path d="M12 10 C9 10, 9 6, 12 6 C15 6, 15 10, 12 10"/>
         </svg>
         投保即享好禮
       </h3>

@@ -32,7 +32,13 @@
             href="#referral"
             @click.prevent="scrollToReferral"
             class="nav-referral-btn">
-            🎁 投保送$1000
+            <svg class="gift-icon-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="10" width="18" height="12" rx="1"/>
+              <rect x="3" y="10" width="18" height="4" rx="1"/>
+              <line x1="12" y1="10" x2="12" y2="22"/>
+              <path d="M12 10 C9 10, 9 6, 12 6 C15 6, 15 10, 12 10"/>
+            </svg>
+            <span>投保送$1000</span>
           </a>
         </div>
 
@@ -84,8 +90,14 @@
           <a
             href="#referral"
             @click.prevent="scrollToReferral(); toggleMobileMenu()"
-            class="block px-4 py-3 rounded-lg text-base font-medium text-center bg-gradient-to-r from-[#E31E2D] to-[#C41E3A] text-white hover:from-[#C41E3A] hover:to-[#A01828] transition-all duration-300">
-            🎁 投保送$1000
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-base font-medium bg-gradient-to-r from-[#E31E2D] to-[#C41E3A] text-white hover:from-[#C41E3A] hover:to-[#A01828] transition-all duration-300">
+            <svg class="gift-icon-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="10" width="18" height="12" rx="1"/>
+              <rect x="3" y="10" width="18" height="4" rx="1"/>
+              <line x1="12" y1="10" x2="12" y2="22"/>
+              <path d="M12 10 C9 10, 9 6, 12 6 C15 6, 15 10, 12 10"/>
+            </svg>
+            <span>投保送$1000</span>
           </a>
         </div>
       </div>
@@ -294,13 +306,24 @@ onUnmounted(() => {
   white-space: nowrap;
   transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-referral-btn:hover {
   background: linear-gradient(135deg, #C41E3A, #A01828);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(227, 30, 45, 0.4);
+}
+
+/* 導航列禮物 Icon 樣式 */
+.gift-icon-nav {
+  width: 20px;
+  height: 20px;
+  color: #FFFFFF;
+  stroke-width: 2;
+  flex-shrink: 0;
 }
 
 /* 移動選單過渡動畫 */
