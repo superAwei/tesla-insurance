@@ -7,7 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'tesla-red': '#E82127',
+        'tesla-red': '#E31E2D',
+        'tesla-red-dark': '#C41E3A',
+        'tesla-red-darker': '#A01828',
+        'tesla-red-light': '#FEE2E2',
         'tesla-dark': '#171A20',
         'tesla-gray': '#393C41',
       },

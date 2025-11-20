@@ -33,15 +33,15 @@
           <div class="text-sm md:text-base lg:text-lg text-gray-300 font-light">服務車主</div>
         </div>
 
-        <!-- 平均省下保費 -->
+        <!-- 平均節省 -->
         <div class="stat-card backdrop-blur-md rounded-xl p-6 md:p-8 hover:bg-white/5 transition-all duration-300">
           <div class="flex items-baseline justify-center gap-2 mb-2 md:mb-3">
-            <span class="text-base md:text-lg lg:text-xl text-white font-light">NT$</span>
+            <span class="text-base md:text-lg lg:text-xl text-white font-light">$</span>
             <span class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
               {{ animatedStats.savings.toLocaleString() }}
             </span>
           </div>
-          <div class="text-sm md:text-base lg:text-lg text-gray-300 font-light">平均省下保費</div>
+          <div class="text-sm md:text-base lg:text-lg text-gray-300 font-light">平均節省</div>
         </div>
 
         <!-- 客戶滿意度 -->
@@ -54,11 +54,15 @@
       </div>
 
       <!-- Subtitle -->
-      <p class="hero-subtitle text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 md:mb-8 max-w-3xl mx-auto opacity-0 translate-y-10 delay-150 leading-relaxed"
-         :class="{ 'animate-fade-in-up': isVisible }">
-        全方位保障，透明費率，專業服務<br class="hidden md:block">
-        讓您的電動車之旅更加安心
-      </p>
+      <div class="hero-subtitle text-center max-w-3xl mx-auto opacity-0 translate-y-10 delay-150 mb-6 md:mb-8"
+           :class="{ 'animate-fade-in-up': isVisible }">
+        <p class="text-base text-gray-400 font-medium mb-4" style="letter-spacing: 2px;">
+          誠實建議 · 多家比價 · 專業透明
+        </p>
+        <p class="text-xl text-white font-semibold">
+          讓您的 Tesla 之旅更安心
+        </p>
+      </div>
 
       <!-- CTA Buttons -->
       <div class="cta-container opacity-0 translate-y-10 delay-200 mb-6 md:mb-8"
@@ -129,7 +133,7 @@ const isVisible = ref(false)
 // 目標數字
 const targetStats = {
   customers: 500,
-  savings: 18000,
+  savings: 8000,
   satisfaction: 98
 }
 
@@ -280,4 +284,21 @@ const scrollToCalculator = () => {
 .scroll-indicator {
   padding: 0.5rem;
 }
+
+/* Referral badge subtle pulse animation */
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
 </style>

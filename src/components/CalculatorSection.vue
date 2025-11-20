@@ -10,15 +10,7 @@
       <div class="calculator-container">
 
         <!-- 稀缺性提示區塊 -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-gray-200">
-          <!-- 限定優惠 -->
-          <div class="flex items-center gap-2 bg-tesla-red/5 px-4 py-3 rounded-lg border border-tesla-red/20">
-            <span class="text-2xl" role="img" aria-label="時間限制">⏰</span>
-            <p class="text-sm md:text-base text-gray-700">
-              本月限定: 填寫表單即送<span class="text-tesla-red font-semibold">『特斯拉車險完整指南』</span>電子書
-            </p>
-          </div>
-
+        <div class="flex justify-center items-center mb-8 pb-6 border-b border-gray-200">
           <!-- 今日人數 -->
           <div class="flex items-center gap-2 text-sm md:text-base text-gray-600">
             <span class="text-xl" role="img" aria-label="用戶人數">👥</span>
@@ -133,13 +125,13 @@
             <input
               type="range"
               v-model="budget"
-              min="20000"
+              min="30000"
               max="100000"
               step="5000"
               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
             />
             <div class="flex justify-between text-sm text-gray-500 mt-2">
-              <span>NT$ 20,000</span>
+              <span>NT$ 30,000</span>
               <span>NT$ 100,000</span>
             </div>
           </div>
@@ -154,6 +146,11 @@
               </p>
             </div>
           </div>
+
+          <!-- 免責聲明 -->
+          <p class="text-sm text-gray-300 text-center mt-4">
+            * Tesla 車險需人工審核,最終保費以保險公司核保結果為準
+          </p>
         </div>
 
         <!-- Step 3: Contact Information -->
@@ -310,6 +307,7 @@
                 {{ errors.contactTime }}
               </p>
             </div>
+
           </div>
 
           <!-- Submit Button -->
@@ -335,7 +333,7 @@
 
             <!-- Trust Indicators -->
             <div class="mt-4 text-center text-sm text-gray-600">
-              <div class="flex items-center justify-center gap-4 flex-wrap">
+              <div class="flex items-center justify-center gap-4 flex-wrap mb-3">
                 <span class="flex items-center gap-1">
                   <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -346,7 +344,7 @@
                   <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                   </svg>
-                  24小時內回覆
+                  1-2個工作天回覆
                 </span>
                 <span class="flex items-center gap-1">
                   <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -355,6 +353,9 @@
                   資料保密
                 </span>
               </div>
+              <p class="text-xs text-gray-400">
+                * 保費試算僅供參考,實際費用以保險公司審核為準
+              </p>
             </div>
           </div>
         </div>
@@ -443,7 +444,8 @@ const formData = reactive({
   name: '',
   phone: '',
   lineId: '',
-  contactTime: ''
+  contactTime: '',
+  referrer: ''
 })
 
 // 表單驗證狀態
@@ -493,6 +495,15 @@ const handleModelChange = () => {
   const model = carModels.find(m => m.name === selectedModelName.value) || null
   selectedModel.value = model
 
+  // Google Analytics 事件追蹤 - 車型選擇
+  if (model && typeof window.gtag !== 'undefined') {
+    window.gtag('event', 'model_select', {
+      'event_category': 'engagement',
+      'event_label': 'car_model',
+      'value': model.name
+    })
+  }
+
   // 預載入新選擇的圖片
   if (model && model.displayImage) {
     preloadImage(model.displayImage)
@@ -520,26 +531,33 @@ const showResults = computed(() => {
 
 // 預算反饋
 const budgetFeedback = computed(() => {
-  if (budget.value < 30000) {
+  if (budget.value < 40000) {
     return {
       icon: '⚠️',
-      message: '建議提高預算以獲得更全面保障',
-      bgClass: 'bg-yellow-50 border border-yellow-200',
-      textClass: 'text-yellow-700'
+      message: '提醒:Tesla 車險保費通常在 4 萬元以上,低於此金額可能較難找到承保方案',
+      bgClass: 'bg-amber-100 border-l-4 border-amber-500',
+      textClass: 'text-amber-800'
     }
-  } else if (budget.value >= 30000 && budget.value <= 60000) {
+  } else if (budget.value >= 40000 && budget.value < 50000) {
     return {
-      icon: '✅',
+      icon: '💡',
+      message: '此預算可提供基本保障,如需更完整方案建議提高至 5 萬元以上',
+      bgClass: 'bg-blue-100 border-l-4 border-blue-500',
+      textClass: 'text-blue-800'
+    }
+  } else if (budget.value >= 50000 && budget.value < 70000) {
+    return {
+      icon: '✓',
       message: '此預算可獲得完整保障方案',
-      bgClass: 'bg-green-50 border border-green-200',
-      textClass: 'text-green-700'
+      bgClass: 'bg-green-100 border-l-4 border-green-500',
+      textClass: 'text-green-800'
     }
   } else {
     return {
       icon: '⭐',
-      message: '您可享有頂級全方位保障',
-      bgClass: 'bg-blue-50 border border-blue-200',
-      textClass: 'text-blue-700'
+      message: '優質預算!可獲得全方位保障與最佳理賠條件',
+      bgClass: 'bg-yellow-100 border-l-4 border-yellow-500',
+      textClass: 'text-yellow-800'
     }
   }
 })
@@ -680,6 +698,7 @@ const handleSubmit = async () => {
       phone: formData.phone,
       line_id: formData.lineId || '未提供',
       contact_time: formData.contactTime,
+      referrer: formData.referrer || '無',
       car_model: selectedModel.value.name,
       car_year: selectedYear.value,
       budget_range: `NT$ ${budget.value.toLocaleString()}`,
@@ -705,6 +724,15 @@ const handleSubmit = async () => {
 
     console.log('Email 發送成功:', response)
 
+    // Google Analytics 事件追蹤
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'form_submit', {
+        'event_category': 'engagement',
+        'event_label': 'insurance_inquiry',
+        'value': 1
+      })
+    }
+
     // 顯示成功訊息
     showSuccess.value = true
 
@@ -714,6 +742,7 @@ const handleSubmit = async () => {
     formData.phone = ''
     formData.lineId = ''
     formData.contactTime = ''
+    formData.referrer = ''
 
     // 重置驗證狀態
     Object.keys(errors).forEach(key => {
@@ -760,6 +789,18 @@ watch([selectedModel, selectedYear], () => {
     modelType: selectedModel.value?.type || '',
     year: selectedYear.value
   })
+})
+
+// 監聽預算變化，用於 GA 追蹤
+watch(budget, (newBudget, oldBudget) => {
+  // 只在實際變化時追蹤（避免初始化時觸發）
+  if (oldBudget && newBudget !== oldBudget && typeof window.gtag !== 'undefined') {
+    window.gtag('event', 'budget_select', {
+      'event_category': 'engagement',
+      'event_label': 'budget_slider',
+      'value': parseInt(newBudget)
+    })
+  }
 })
 </script>
 

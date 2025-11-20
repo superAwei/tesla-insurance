@@ -6,7 +6,7 @@
 
         <!-- 標題 -->
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12 text-white">
-          是否遇到這些困擾？
+          Tesla 車險常見困擾
         </h2>
 
         <!-- 痛點列表 -->
@@ -34,18 +34,14 @@
         <!-- 分隔線 -->
         <div class="border-t border-gray-600/50 my-8 md:my-10"></div>
 
-        <!-- 解決方案（綠色勾勾） -->
+        <!-- 說明文字 -->
         <div
-          class="solution-item flex items-center justify-center gap-4 opacity-0"
+          class="solution-item flex items-center justify-center opacity-0"
           :class="{ 'animate-fade-in-up': visibleItems.includes(4) }"
           ref="solutionRef">
-          <!-- ✅ 圖標 -->
-          <svg class="w-7 h-7 md:w-8 md:h-8 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-          </svg>
-          <!-- 解決方案文字 -->
-          <p class="text-xl md:text-2xl font-semibold text-green-400">
-            讓專業保險經紀人為你量身規劃！
+          <!-- 說明文字 -->
+          <p class="text-base text-gray-400">
+            讓我們協助你找到適合的方案
           </p>
         </div>
 
@@ -58,10 +54,10 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const painPoints = [
-  '特斯拉維修費用動輒數十萬，擔心保障不足？',
-  '想找懂電動車的保險專家，而不是傳統業務員？',
-  '各家保險公司方案看得眼花撩亂，不知如何選擇？',
-  '不確定現有保單是否真的適合電動車？'
+  '不確定哪些保障是必要的,哪些可以省下來?',
+  '想知道如何透過限定駕駛等方式降低保費?',
+  '市場上 10+ 家產險公司,不知道怎麼比較?',
+  '想找有 Tesla 投保經驗的人諮詢,而非一般業務?'
 ]
 
 const visibleItems = ref([])
@@ -145,24 +141,13 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Hover 效果 */
+/* 移除 Hover 效果 */
 .pain-point-item {
-  transition: transform 0.3s ease;
-}
-
-.pain-point-item:hover {
-  transform: translateX(8px);
+  /* 移除 hover 交互 */
 }
 
 .solution-item {
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-}
-
-.solution-item:hover {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.08) 100%);
-  transform: scale(1.02);
+  padding: 1rem 0;
+  /* 简化样式，纯文字呈现 */
 }
 </style>

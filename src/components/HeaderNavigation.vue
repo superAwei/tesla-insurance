@@ -26,6 +26,14 @@
             :class="{ 'active': activeSection === item.id }">
             {{ item.label }}
           </a>
+
+          <!-- Referral Button -->
+          <a
+            href="#referral"
+            @click.prevent="scrollToReferral"
+            class="nav-referral-btn">
+            🎁 投保送$1000
+          </a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -71,6 +79,14 @@
             :class="{ 'bg-tesla-red/20 text-white': activeSection === item.id }">
             {{ item.label }}
           </a>
+
+          <!-- Mobile Referral Button -->
+          <a
+            href="#referral"
+            @click.prevent="scrollToReferral(); toggleMobileMenu()"
+            class="block px-4 py-3 rounded-lg text-base font-medium text-center bg-gradient-to-r from-[#E31E2D] to-[#C41E3A] text-white hover:from-[#C41E3A] hover:to-[#A01828] transition-all duration-300">
+            🎁 投保送$1000
+          </a>
         </div>
       </div>
     </transition>
@@ -88,8 +104,7 @@ const activeSection = ref('')
 const navItems = [
   { id: 'features', label: '關於我們' },
   { id: 'calculator', label: '保險試算' },
-  { id: 'faq', label: '常見問題' },
-  { id: 'contact', label: '聯絡我們' }
+  { id: 'faq', label: '常見問題' }
 ]
 
 // 滾動到頂部
@@ -117,6 +132,38 @@ const scrollToSection = (sectionId) => {
 // 切換移動選單
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+// 滾動到推薦區塊
+const scrollToReferral = () => {
+  // Google Analytics 事件追蹤 - 推薦按鈕點擊
+  if (typeof window.gtag !== 'undefined') {
+    window.gtag('event', 'referral_click', {
+      'event_category': 'engagement',
+      'event_label': 'referral_navigation'
+    })
+  }
+
+  const faq = document.getElementById('faq')
+  if (faq) {
+    const headerOffset = 80
+    const elementPosition = faq.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+
+    // 稍微延遲後定位到推薦問題
+    setTimeout(() => {
+      const faqItems = document.querySelectorAll('.faq-item')
+      if (faqItems[7]) {
+        faqItems[7].scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }
+    }, 800)
+  }
+  isMobileMenuOpen.value = false
 }
 
 // 監聽滾動事件
@@ -233,6 +280,27 @@ onUnmounted(() => {
 
 .nav-link.active {
   color: white;
+}
+
+/* 推薦按鈕樣式 */
+.nav-referral-btn {
+  background: linear-gradient(135deg, #E31E2D, #C41E3A);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 16px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-referral-btn:hover {
+  background: linear-gradient(135deg, #C41E3A, #A01828);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 45, 0.4);
 }
 
 /* 移動選單過渡動畫 */

@@ -12,6 +12,7 @@
         <div
           v-for="(item, index) in faqItems"
           :key="index"
+          :data-faq="index === 7 ? 'referral' : null"
           class="faq-item bg-tesla-gray/30 backdrop-blur-sm rounded-lg border border-gray-700/50 overflow-hidden
                  hover:border-tesla-red/50 transition-all duration-300">
 
@@ -39,16 +40,6 @@
         </div>
       </div>
 
-      <!-- CTA -->
-      <div class="text-center mt-12">
-        <p class="text-gray-400 mb-4">還有其他問題？</p>
-        <a
-          href="#contact"
-          @click.prevent="scrollToContact"
-          class="inline-block btn-primary text-base md:text-lg px-8 md:px-10 py-3 md:py-4">
-          聯絡我們
-        </a>
-      </div>
     </div>
   </section>
 </template>
@@ -82,29 +73,34 @@ const faqItems = [
   {
     question: '購買保險需要準備哪些文件？',
     answer: '您需要準備：1) 身分證明文件 2) 駕照 3) 行照 4) 特斯拉購車證明或車輛登記書。我們的顧問會協助您完成所有文件準備。'
+  },
+  {
+    question: '為什麼我填的預算和最終保費可能不同？',
+    answer: 'Tesla 車險需經過保險公司人工審核,最終保費會依據以下因素調整:\n• 車輛實際狀況(年份、里程、改裝)\n• 駕駛人年齡與駕駛紀錄\n• 承保項目與保額選擇\n• 各保險公司的核保標準\n\n您在網站填寫的預算範圍僅供參考,實際報價會在 3-5 個工作天內提供,以保險公司正式核保結果為準。'
+  },
+  {
+    question: '投保有提供禮券嗎？',
+    answer: '有的！成功投保即可獲得超商禮券：\n\n• 投保禮：$1,000 超商禮券\n\n【如何領取】\n1. 填寫表單並完成投保流程\n2. 投保生效後，我們會主動聯繫提供禮券\n3. 禮券將於投保生效後 7 個工作天內寄出\n\n【重要說明】\n• 此為個人感謝禮，非保險公司提供\n• 與保費折讓無關，保費以保險公司核定為準\n• 每人限領一次，不得重複領取\n• 詳細辦法請透過 LINE 或 Email 洽詢'
   }
 ]
 
 const toggleItem = (index) => {
   const itemIndex = openItems.value.indexOf(index)
   if (itemIndex > -1) {
+    // 收合項目
     openItems.value.splice(itemIndex, 1)
   } else {
+    // 展開項目
     openItems.value.push(index)
-  }
-}
 
-const scrollToContact = () => {
-  const element = document.getElementById('contact')
-  if (element) {
-    const headerOffset = 80
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    })
+    // Google Analytics 事件追蹤 - FAQ 展開
+    if (typeof window.gtag !== 'undefined' && faqItems[index]) {
+      const question = faqItems[index].question.substring(0, 50)
+      window.gtag('event', 'faq_open', {
+        'event_category': 'engagement',
+        'event_label': question
+      })
+    }
   }
 }
 </script>
